@@ -38,7 +38,7 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 bg-gray-100 rounded-lg mb-4">
+    <form onSubmit={handleSubmit} className="p-4 bg-gray-800 rounded-lg mb-4">
       <h2 className="text-xl font-bold mb-2">Add Food</h2>
       <div className="grid grid-cols-2 gap-2">
         <input

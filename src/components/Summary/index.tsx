@@ -10,7 +10,7 @@ interface SummaryProps {
 
 const Summary: React.FC<SummaryProps> = ({ totalCalories, totalProtein, totalCarbs, totalFat }) => {
   return (
-    <div className="p-4 bg-gray-100 rounded-lg">
+    <div className="p-4 bg-gray-800 rounded-lg">
       <h2 className="text-xl font-bold mb-2">Daily Summary</h2>
       <div className="grid grid-cols-2 gap-2">
         <div>
