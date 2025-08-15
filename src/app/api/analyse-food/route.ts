@@ -1,72 +1,72 @@
 import { NextResponse } from 'next/server';
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
 
 export async function POST(request: Request) {
-  try {
-    // Parse form data to handle file uploads
-    const formData = await request.formData();
-    
-    // Extract the food image
-    const foodImage = formData.get('foodImage') as File | null;
-    
-    // Extract other form fields
-    const otherData: Record<string, any> = {};
-    formData.forEach((value, key) => {
-      if (key !== 'foodImage') {
-        otherData[key] = value;
-      }
-    });
-    
-    // Validate that an image was provided
-    if (!foodImage) {
-      return NextResponse.json({ error: 'No food image provided' }, { status: 400 });
-    }
-    
-    // Validate file type (accept common image formats)
-    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
-    if (!allowedTypes.includes(foodImage.type)) {
-      return NextResponse.json({ 
-        error: 'Invalid file type. Please upload a JPEG, PNG, or WebP image.' 
-      }, { status: 400 });
-    }
-    
-    // Validate file size (limit to 10MB)
-    const maxSize = 10 * 1024 * 1024; // 10MB in bytes
-    if (foodImage.size > maxSize) {
-      return NextResponse.json({ 
-        error: 'File too large. Please upload an image smaller than 10MB.' 
-      }, { status: 400 });
-    }
-    
-    // Convert file to buffer for processing
-    const imageBuffer = await foodImage.arrayBuffer();
-    const imageData = {
-      name: foodImage.name,
-      type: foodImage.type,
-      size: foodImage.size,
-      buffer: Buffer.from(imageBuffer)
-    };
-    
-    console.log('Received food image:', {
-      name: imageData.name,
-      type: imageData.type,
-      size: imageData.size,
-      bufferLength: imageData.buffer.length
-    });
-    console.log('Other form data:', otherData);
+  const formData = await request.formData();
+  const foodImage = formData.get('foodImage') as File | null;
 
-    // Here you would add your logic to analyze the food image
-    // For now, we'll just return a success message with the received data
-    return NextResponse.json({ 
-      message: 'Food image received and analyzed (mock)', 
-      imageInfo: {
-        name: imageData.name,
-        type: imageData.type,
-        size: imageData.size
+  if (!foodImage) {
+    return NextResponse.json({ error: 'No file uploaded.' }, { status: 400 });
+  }
+
+  try {
+    const imageBuffer = await foodImage.arrayBuffer();
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-lite' });
+    const prompt = `
+Analyze the food shown in the image.
+
+If there are multiple food items, identify and name each item separately.
+
+For each identified food item:
+- Estimate the quantity (in grams for solids, ml for liquids).
+- List all macronutrients available per gram (or per ml), including:
+  - Calories
+  - Protein
+  - Carbohydrates
+  - Fat
+  - more if available
+
+Return the output in JSON format as an array of objects. Each object should contain:
+- "food-name": the name of the food item
+- "quantity": estimated amount (in grams or ml)
+- "macronutrients": an array of objects, each with:
+  - "name": name of the macronutrient (e.g., "calories", "protein")
+  - "amountPerUnit": numeric value per gram, ml etc.
+  - "unit": unit of measurement (e.g., "kcal/g", "g/g")
+If the unit is "g/g", replace it with "gm" to simplify the output.
+`;
+
+    const imagePart = {
+      inlineData: {
+        data: Buffer.from(imageBuffer).toString('base64'),
+        mimeType: foodImage.type,
       },
-      otherData: otherData
-    }, { status: 200 });
+    };
+
+    const result = await model.generateContent([prompt, imagePart]);
+    const response = await result.response;
+    const text = response.text();
+
+    // Clean the response to ensure it's valid JSON
+    const cleanedText = text
+      .replace(/```json/g, '')
+      .replace(/```/g, '')
+      .trim();
+
+    let parsedData;
+    try {
+      parsedData = JSON.parse(cleanedText);
+    } catch (parseError) {
+      console.error('JSON parsing error:', parseError);
+      return NextResponse.json({ error: 'Invalid response format from AI model.' }, { status: 500 });
+    }
+
+    return NextResponse.json(parsedData);
   } catch (error) {
-    console.error('Error processing request:', error);
-    return NextResponse.json({ error: 'Error processing request' }, { status: 500 });
+    console.error('Error analyzing image:', error);
+    return NextResponse.json({ error: 'Error analyzing the image.' }, { status: 500 });
   }
 }
