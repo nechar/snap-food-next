@@ -1,6 +1,7 @@
 
 'use client';
 
+  import { Box, Heading } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import Meal from '@/components/Meal';
 import Summary from '@/components/Summary';
@@ -24,9 +25,14 @@ const Home: React.FC = () => {
   const dinnerFoods = foods.filter((food) => food.meal === 'Dinner');
   const snackFoods = foods.filter((food) => food.meal === 'Snacks');
 
+
+// ... (rest of the file is the same until the return statement)
+
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Food Log</h1>
+    <Box p={4}>
+      <Heading as="h1" size="xl" mb={4}>
+        Food Log
+      </Heading>
       <AddFoodForm onAddFood={addFood} />
       <Summary
         totalCalories={totalCalories}
@@ -34,13 +40,13 @@ const Home: React.FC = () => {
         totalCarbs={totalCarbs}
         totalFat={totalFat}
       />
-      <div className="mt-4">
+      <Box mt={4}>
         <Meal mealName="Breakfast" foods={breakfastFoods} />
         <Meal mealName="Lunch" foods={lunchFoods} />
         <Meal mealName="Dinner" foods={dinnerFoods} />
         <Meal mealName="Snacks" foods={snackFoods} />
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

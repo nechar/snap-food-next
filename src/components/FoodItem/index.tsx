@@ -1,5 +1,5 @@
-
-import React from 'react';
+import React from "react";
+import { Box, Text } from "@chakra-ui/react";
 
 interface FoodItemProps {
   name: string;
@@ -9,16 +9,22 @@ interface FoodItemProps {
   fat: number;
 }
 
-const FoodItem: React.FC<FoodItemProps> = ({ name, calories, protein, carbs, fat }) => {
+const FoodItem: React.FC<FoodItemProps> = ({
+  name,
+  calories,
+  protein,
+  carbs,
+  fat,
+}) => {
   return (
-    <div className="flex justify-between p-2 border-b">
-      <div>
-        <p className="font-bold">{name}</p>
-        <p className="text-sm text-gray-500">
+    <Box d="flex" justifyContent="space-between" p={2} borderBottomWidth="1px">
+      <Box>
+        <Text fontWeight="bold">{name}</Text>
+        <Text fontSize="sm" color="gray.500">
           {calories} kcal, {protein}g P, {carbs}g C, {fat}g F
-        </p>
-      </div>
-    </div>
+        </Text>
+      </Box>
+    </Box>
   );
 };
 

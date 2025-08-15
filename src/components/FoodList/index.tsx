@@ -1,14 +1,7 @@
-
-import React from 'react';
-import FoodItem from '../FoodItem';
-
-interface Food {
-  name: string;
-  calories: number;
-  protein: number;
-  carbs: number;
-  fat: number;
-}
+import React from "react";
+import { Box } from "@chakra-ui/react";
+import FoodItem from "../FoodItem";
+import { Food } from "@/lib/mock-data";
 
 interface FoodListProps {
   foods: Food[];
@@ -16,11 +9,11 @@ interface FoodListProps {
 
 const FoodList: React.FC<FoodListProps> = ({ foods }) => {
   return (
-    <div>
+    <Box>
       {foods.map((food, index) => (
         <FoodItem key={index} {...food} />
       ))}
-    </div>
+    </Box>
   );
 };
 

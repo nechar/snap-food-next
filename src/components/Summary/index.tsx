@@ -1,5 +1,5 @@
-
-import React from 'react';
+import React from "react";
+import { Box, Heading, Grid, Text } from "@chakra-ui/react";
 
 interface SummaryProps {
   totalCalories: number;
@@ -8,29 +8,36 @@ interface SummaryProps {
   totalFat: number;
 }
 
-const Summary: React.FC<SummaryProps> = ({ totalCalories, totalProtein, totalCarbs, totalFat }) => {
+const Summary: React.FC<SummaryProps> = ({
+  totalCalories,
+  totalProtein,
+  totalCarbs,
+  totalFat,
+}) => {
   return (
-    <div className="p-4 bg-gray-800 rounded-lg">
-      <h2 className="text-xl font-bold mb-2">Daily Summary</h2>
-      <div className="grid grid-cols-2 gap-2">
-        <div>
-          <p className="font-bold">Calories</p>
-          <p>{totalCalories} kcal</p>
-        </div>
-        <div>
-          <p className="font-bold">Protein</p>
-          <p>{totalProtein} g</p>
-        </div>
-        <div>
-          <p className="font-bold">Carbs</p>
-          <p>{totalCarbs} g</p>
-        </div>
-        <div>
-          <p className="font-bold">Fat</p>
-          <p>{totalFat} g</p>
-        </div>
-      </div>
-    </div>
+    <Box p={4} borderWidth="1px" borderRadius="lg">
+      <Heading as="h2" size="lg" mb={2}>
+        Daily Summary
+      </Heading>
+      <Grid templateColumns="repeat(2, 1fr)" gap={2}>
+        <Box>
+          <Text fontWeight="bold">Calories</Text>
+          <Text>{totalCalories} kcal</Text>
+        </Box>
+        <Box>
+          <Text fontWeight="bold">Protein</Text>
+          <Text>{totalProtein} g</Text>
+        </Box>
+        <Box>
+          <Text fontWeight="bold">Carbs</Text>
+          <Text>{totalCarbs} g</Text>
+        </Box>
+        <Box>
+          <Text fontWeight="bold">Fat</Text>
+          <Text>{totalFat} g</Text>
+        </Box>
+      </Grid>
+    </Box>
   );
 };
 

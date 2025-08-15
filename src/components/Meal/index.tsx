@@ -1,14 +1,7 @@
-
-import React from 'react';
-import FoodList from '../FoodList';
-
-interface Food {
-  name: string;
-  calories: number;
-  protein: number;
-  carbs: number;
-  fat: number;
-}
+import React from "react";
+import { Box, Heading } from "@chakra-ui/react";
+import FoodList from "../FoodList";
+import { Food } from "@/lib/mock-data";
 
 interface MealProps {
   mealName: string;
@@ -17,10 +10,12 @@ interface MealProps {
 
 const Meal: React.FC<MealProps> = ({ mealName, foods }) => {
   return (
-    <div className="mb-4">
-      <h2 className="text-xl font-bold mb-2">{mealName}</h2>
+    <Box mb={4}>
+      <Heading as="h2" size="lg" mb={2}>
+        {mealName}
+      </Heading>
       <FoodList foods={foods} />
-    </div>
+    </Box>
   );
 };
 
