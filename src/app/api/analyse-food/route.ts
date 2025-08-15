@@ -18,25 +18,18 @@ export async function POST(request: Request) {
     const prompt = `
 Analyze the food shown in the image.
 
-If there are multiple food items, identify and name each item separately.
+If there are multiple food items, identify the most prominent one.
 
-For each identified food item:
-- Estimate the quantity (in grams for solids, ml for liquids).
-- List all macronutrients available per gram (or per ml), including:
+For the identified food item, provide the following details:
+- Estimate the quantity in grams
+- List the following macro nutrients per gram
   - Calories
   - Protein
   - Carbohydrates
   - Fat
-  - more if available
+- Identify what is the food item most likely to be eaten (Eg: breakfast, lunch, dinner, snack)
 
-Return the output in JSON format as an array of objects. Each object should contain:
-- "food-name": the name of the food item
-- "quantity": estimated amount (in grams or ml)
-- "macronutrients": an array of objects, each with:
-  - "name": name of the macronutrient (e.g., "calories", "protein")
-  - "amountPerUnit": numeric value per gram, ml etc.
-  - "unit": unit of measurement (e.g., "kcal/g", "g/g")
-If the unit is "g/g", replace it with "gm" to simplify the output.
+Respond with a JSON response
 `;
 
     const imagePart = {
@@ -49,22 +42,23 @@ If the unit is "g/g", replace it with "gm" to simplify the output.
     const result = await model.generateContent([prompt, imagePart]);
     const response = await result.response;
     const text = response.text();
+    console.log("🚀 ~ POST ~ text:", text)
 
     // Clean the response to ensure it's valid JSON
-    const cleanedText = text
-      .replace(/```json/g, '')
-      .replace(/```/g, '')
-      .trim();
+    // const cleanedText = text
+    //   .replace(/```json/g, '')
+    //   .replace(/```/g, '')
+    //   .trim();
 
-    let parsedData;
-    try {
-      parsedData = JSON.parse(cleanedText);
-    } catch (parseError) {
-      console.error('JSON parsing error:', parseError);
-      return NextResponse.json({ error: 'Invalid response format from AI model.' }, { status: 500 });
-    }
+    // let parsedData;
+    // try {
+    //   parsedData = JSON.parse(cleanedText);
+    // } catch (parseError) {
+    //   console.error('JSON parsing error:', parseError);
+    //   return NextResponse.json({ error: 'Invalid response format from AI model.' }, { status: 500 });
+    // }
 
-    return NextResponse.json(parsedData);
+    return NextResponse.json('parsedData');
   } catch (error) {
     console.error('Error analyzing image:', error);
     return NextResponse.json({ error: 'Error analyzing the image.' }, { status: 500 });
