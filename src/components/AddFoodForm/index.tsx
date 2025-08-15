@@ -46,37 +46,37 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
           placeholder="Food name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="p-2 border rounded"
+          className="p-2 border rounded text-gray-800"
         />
         <input
           type="number"
           placeholder="Calories"
           value={calories}
           onChange={(e) => setCalories(e.target.value)}
-          className="p-2 border rounded"
+          className="p-2 border rounded text-gray-800"
         />
         <input
           type="number"
           placeholder="Protein (g)"
           value={protein}
           onChange={(e) => setProtein(e.target.value)}
-          className="p-2 border rounded"
+          className="p-2 border rounded text-gray-800"
         />
         <input
           type="number"
           placeholder="Carbs (g)"
           value={carbs}
           onChange={(e) => setCarbs(e.target.value)}
-          className="p-2 border rounded"
+          className="p-2 border rounded text-gray-800"
         />
         <input
           type="number"
           placeholder="Fat (g)"
           value={fat}
           onChange={(e) => setFat(e.target.value)}
-          className="p-2 border rounded"
+          className="p-2 border rounded text-gray-800"
         />
-        <select value={meal} onChange={(e) => setMeal(e.target.value)} className="p-2 border rounded">
+        <select value={meal} onChange={(e) => setMeal(e.target.value)} className="p-2 border rounded text-gray-800">
           <option value="Breakfast">Breakfast</option>
           <option value="Lunch">Lunch</option>
           <option value="Dinner">Dinner</option>
