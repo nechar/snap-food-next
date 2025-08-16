@@ -68,7 +68,7 @@ const Home: React.FC = () => {
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            <Box mt={4}>
+            <Box >
               <Meal mealName="Breakfast" foods={breakfastFoods} />
               <Meal mealName="Lunch" foods={lunchFoods} />
               <Meal mealName="Dinner" foods={dinnerFoods} />

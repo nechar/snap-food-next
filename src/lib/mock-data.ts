@@ -23,39 +23,7 @@ export const mockFoodData: Food[] = [
     },
     meal_type: 'Breakfast',
   },
-  {
-    food_name: 'Chicken Breast',
-    quantity_grams: 100,
-    macro_nutrients_per_gram: {
-      calories: 1.65,
-      protein: 0.31,
-      carbohydrates: 0,
-      fat: 0.04,
-    },
-    meal_type: 'Lunch',
-  },
-  {
-    food_name: 'Brown Rice',
-    quantity_grams: 100,
-    macro_nutrients_per_gram: {
-      calories: 2.15,
-      protein: 0.05,
-      carbohydrates: 0.45,
-      fat: 0.02,
-    },
-    meal_type: 'Lunch',
-  },
-  {
-    food_name: 'Broccoli',
-    quantity_grams: 100,
-    macro_nutrients_per_gram: {
-      calories: 0.55,
-      protein: 0.04,
-      carbohydrates: 0.11,
-      fat: 0.01,
-    },
-    meal_type: 'Lunch',
-  },
+ 
   {
     food_name: 'Salmon',
     quantity_grams: 100,

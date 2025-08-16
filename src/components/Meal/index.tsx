@@ -1,7 +1,10 @@
 import React from "react";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Heading, Text } from "@chakra-ui/react";
 import FoodList from "../FoodList";
 import { Food } from "@/app/model/food-nutrient";
+
+import {  Grid } from "@chakra-ui/react";
+import FoodItem from "../FoodItem";
 
 interface MealProps {
   mealName: string;
@@ -9,12 +12,24 @@ interface MealProps {
 }
 
 const Meal: React.FC<MealProps> = ({ mealName, foods }) => {
+  
   return (
     <Box p={4} borderWidth="1px" borderRadius="lg" mb={4}>
       <Heading as="h3" size="md" mb={2}>
         {mealName}
       </Heading>
-      <FoodList foods={foods} />
+
+       <Grid
+  templateColumns="repeat(3, 1fr)"
+  gap={4}
+  alignItems="start"   // ensures all items align at the top
+>
+  {foods.map((food, index) => (
+    <Box key={index} h="100%">
+      <FoodItem food={food} />
+    </Box>
+  ))}
+</Grid>
     </Box>
   );
 };
