@@ -98,14 +98,6 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
 
   return (
     <>
-      {/* File upload */}
-      <Box p={4} borderWidth="1px" borderRadius="lg" mb={4}>
-        <Input type="file" onChange={handleFileChange} p={1} mb={2} />
-        <Button onClick={handleFileUpload} colorScheme="teal">
-          Upload File
-        </Button>
-      </Box>
-      {/* Macro nutrient calculations */}
       <Box
         as="form"
         onSubmit={handleSubmit}
@@ -117,6 +109,15 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
         <Heading as="h2" size="lg" mb={2}>
           Add Food
         </Heading>
+        {/* File upload */}
+        <Box>
+          <Input type="file" onChange={handleFileChange} p={1} mb={2} />
+          <Button onClick={handleFileUpload} colorScheme="teal">
+            Upload File
+          </Button>
+        </Box>
+
+        {/* Macro nutrient calculations */}s
         <Grid templateColumns="repeat(2, 1fr)" gap={2}>
           <Input
             type="text"
@@ -170,7 +171,6 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
             <option value="Snacks">Snacks</option>
           </Select>
         </Grid>
-
         <Button type="submit" mt={4} colorScheme="blue">
           Add
         </Button>
