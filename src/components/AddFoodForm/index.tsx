@@ -6,6 +6,7 @@ import {
   Input,
   Select,
   Button,
+  Text,
 } from "@chakra-ui/react";
 import { Food, FoodNutrient } from "@/app/model/food-nutrient";
 
@@ -15,10 +16,18 @@ interface AddFoodFormProps {
 
 const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
   const [foodName, setFoodName] = useState("");
-  const [quantityGrams, setQuantityGrams] = useState<number | undefined>(undefined);
-  const [caloriesPerGram, setCaloriesPerGram] = useState<number | undefined>(undefined);
-  const [proteinPerGram, setProteinPerGram] = useState<number | undefined>(undefined);
-  const [carbohydratesPerGram, setCarbohydratesPerGram] = useState<number | undefined>(undefined);
+  const [quantityGrams, setQuantityGrams] = useState<number | undefined>(
+    undefined
+  );
+  const [caloriesPerGram, setCaloriesPerGram] = useState<number | undefined>(
+    undefined
+  );
+  const [proteinPerGram, setProteinPerGram] = useState<number | undefined>(
+    undefined
+  );
+  const [carbohydratesPerGram, setCarbohydratesPerGram] = useState<
+    number | undefined
+  >(undefined);
   const [fatPerGram, setFatPerGram] = useState<number | undefined>(undefined);
   const [meal_type, setMeal] = useState("Breakfast");
 
@@ -55,11 +64,11 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
     if (selectedFile) {
       console.log("Uploading file:", selectedFile.name);
       const formData = new FormData();
-      formData.append('foodImage', selectedFile);
+      formData.append("foodImage", selectedFile);
 
       try {
-        const response = await fetch('/api/analyse-food', {
-          method: 'POST',
+        const response = await fetch("/api/analyse-food", {
+          method: "POST",
           body: formData,
         });
 
@@ -70,17 +79,17 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
           setQuantityGrams(result.quantity_grams);
           setCaloriesPerGram(result.macro_nutrients_per_gram.calories);
           setProteinPerGram(result.macro_nutrients_per_gram.protein);
-          setCarbohydratesPerGram(result.macro_nutrients_per_gram.carbohydrates);
+          setCarbohydratesPerGram(
+            result.macro_nutrients_per_gram.carbohydrates
+          );
           setFatPerGram(result.macro_nutrients_per_gram.fat);
-
-
         } else {
           const errorData = await response.json();
-          console.error('File upload failed:', response.status, errorData);
+          console.error("File upload failed:", response.status, errorData);
         }
       } catch (error) {
-        console.error('Error during file upload:', error);
-        alert('Error during file upload. Check console for details.');
+        console.error("Error during file upload:", error);
+        alert("Error during file upload. Check console for details.");
       }
     } else {
       alert("Please select a file first.");
@@ -89,7 +98,7 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
 
   return (
     <>
-      <Box  p={4} borderWidth="1px" borderRadius="lg" mb={4}>
+      <Box p={4} borderWidth="1px" borderRadius="lg" mb={4}>
         <Input type="file" onChange={handleFileChange} p={1} mb={2} />
         <Button onClick={handleFileUpload} colorScheme="teal">
           Upload File
@@ -107,7 +116,6 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
           Add Food
         </Heading>
         <Grid templateColumns="repeat(2, 1fr)" gap={2}>
-          
           <Input
             type="text"
             placeholder="Food name"
@@ -124,39 +132,21 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
             type="number"
             readOnly={true}
             placeholder="Quantity (grams)"
-            value={quantityGrams ?? ''}
-            onChange={(e) => setQuantityGrams(e.target.value === '' ? undefined : parseInt(e.target.value))}
+            value={quantityGrams ?? ""}
+            onChange={(e) =>
+              setQuantityGrams(
+                e.target.value === "" ? undefined : parseInt(e.target.value)
+              )
+            }
           />
 
-          <Input
-            type="number"
-            readOnly={true}
-            placeholder="Calories (per gram)"
-            value={caloriesPerGram ?? ''}
-            onChange={(e) => setCaloriesPerGram(e.target.value === '' ? undefined : parseFloat(e.target.value))}
-          />
-          <Input
-            type="number"
-            readOnly={true}
-            placeholder="Protein (g per gram)"
-            value={proteinPerGram ?? ''}
-            onChange={(e) => setProteinPerGram(e.target.value === '' ? undefined : parseFloat(e.target.value))}
-          />
-          <Input
-            type="number"
-            readOnly={true}
-            placeholder="Carbs (g per gram)"
-            value={carbohydratesPerGram ?? ''}
-            onChange={(e) => setCarbohydratesPerGram(e.target.value === '' ? undefined : parseFloat(e.target.value))}
-          />
-          <Input
-            type="number"
-            readOnly={true}
-            placeholder="Fat (g per gram)"
-            value={fatPerGram ?? ''}
-            onChange={(e) => setFatPerGram(e.target.value === '' ? undefined : parseFloat(e.target.value))}
-          />
-          
+          <Text>Calories (per gram): {caloriesPerGram ?? "-"}</Text>
+
+          <Text>Protein (g per gram): {proteinPerGram ?? "-"}</Text>
+
+          <Text>Carbs (g per gram): {carbohydratesPerGram ?? "-"}</Text>
+
+          <Text>Fat (g per gram): {fatPerGram ?? "-"}</Text>
         </Grid>
 
         <Button type="submit" mt={4} colorScheme="blue">
