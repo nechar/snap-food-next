@@ -179,6 +179,27 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
           <Button type="submit" mt={4} colorScheme="blue">
             Confirm
           </Button>
+
+             
+          <Button
+            mt={4}
+            colorScheme="red"
+            variant="outline"
+            onClick={() => {
+              setFoodName("");
+              setQuantityGrams(undefined);
+              setCaloriesPerGram(undefined);
+              setProteinPerGram(undefined);
+              setCarbohydratesPerGram(undefined);
+              setFatPerGram(undefined);
+              setMeal("Breakfast");
+              setSelectedFile(null);
+              setShowMacros(false);
+            }}
+          >
+            Cancel
+          </Button>
+
         </>
       )}
     </Box>
