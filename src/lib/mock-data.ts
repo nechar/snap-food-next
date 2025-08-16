@@ -1,77 +1,92 @@
+import { Food } from "@/app/model/food-nutrient";
 
-export interface Food {
-    name: string;
-    calories: number;
-    protein: number;
-    carbs: number;
-    fat: number;
-    meal: string;
-  }
-  
-  export const mockFoodData: Food[] = [
-    {
-      name: 'Oats',
-      calories: 150,
-      protein: 5,
-      carbs: 27,
-      fat: 3,
-      meal: 'Breakfast',
+export const mockFoodData: Food[] = [
+  {
+    food_name: 'Oats',
+    quantity_grams: 100,
+    macro_nutrients_per_gram: {
+      calories: 1.5,
+      protein: 0.05,
+      carbohydrates: 0.27,
+      fat: 0.03,
     },
-    {
-      name: 'Banana',
-      calories: 105,
-      protein: 1,
-      carbs: 27,
+    meal_type: 'Breakfast',
+  },
+  {
+    food_name: 'Banana',
+    quantity_grams: 100,
+    macro_nutrients_per_gram: {
+      calories: 1.05,
+      protein: 0.01,
+      carbohydrates: 0.27,
       fat: 0,
-      meal: 'Breakfast',
     },
-    {
-      name: 'Chicken Breast',
-      calories: 165,
-      protein: 31,
-      carbs: 0,
-      fat: 4,
-      meal: 'Lunch',
+    meal_type: 'Breakfast',
+  },
+  {
+    food_name: 'Chicken Breast',
+    quantity_grams: 100,
+    macro_nutrients_per_gram: {
+      calories: 1.65,
+      protein: 0.31,
+      carbohydrates: 0,
+      fat: 0.04,
     },
-    {
-      name: 'Brown Rice',
-      calories: 215,
-      protein: 5,
-      carbs: 45,
-      fat: 2,
-      meal: 'Lunch',
+    meal_type: 'Lunch',
+  },
+  {
+    food_name: 'Brown Rice',
+    quantity_grams: 100,
+    macro_nutrients_per_gram: {
+      calories: 2.15,
+      protein: 0.05,
+      carbohydrates: 0.45,
+      fat: 0.02,
     },
-    {
-      name: 'Broccoli',
-      calories: 55,
-      protein: 4,
-      carbs: 11,
-      fat: 1,
-      meal: 'Lunch',
+    meal_type: 'Lunch',
+  },
+  {
+    food_name: 'Broccoli',
+    quantity_grams: 100,
+    macro_nutrients_per_gram: {
+      calories: 0.55,
+      protein: 0.04,
+      carbohydrates: 0.11,
+      fat: 0.01,
     },
-    {
-      name: 'Salmon',
-      calories: 206,
-      protein: 22,
-      carbs: 0,
-      fat: 13,
-      meal: 'Dinner',
+    meal_type: 'Lunch',
+  },
+  {
+    food_name: 'Salmon',
+    quantity_grams: 100,
+    macro_nutrients_per_gram: {
+      calories: 2.06,
+      protein: 0.22,
+      carbohydrates: 0,
+      fat: 0.13,
     },
-    {
-      name: 'Sweet Potato',
-      calories: 86,
-      protein: 2,
-      carbs: 20,
+    meal_type: 'Dinner',
+  },
+  {
+    food_name: 'Sweet Potato',
+    quantity_grams: 100,
+    macro_nutrients_per_gram: {
+      calories: 0.86,
+      protein: 0.02,
+      carbohydrates: 0.20,
       fat: 0,
-      meal: 'Dinner',
     },
-    {
-      name: 'Almonds',
-      calories: 164,
-      protein: 6,
-      carbs: 6,
-      fat: 14,
-      meal: 'Snacks',
+    meal_type: 'Dinner',
+  },
+  {
+    food_name: 'Almonds',
+    quantity_grams: 100,
+    macro_nutrients_per_gram: {
+      calories: 6.0,
+      protein: 0.21,
+      carbohydrates: 0.21,
+      fat: 0.49,
     },
-  ];
-  
+    meal_type: 'Snacks',
+  },
+];

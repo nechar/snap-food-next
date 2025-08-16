@@ -6,7 +6,8 @@ import React, { useState } from 'react';
 import Meal from '@/components/Meal';
 import Summary from '@/components/Summary';
 import AddFoodForm from '@/components/AddFoodForm';
-import { mockFoodData, Food } from '@/lib/mock-data';
+import { mockFoodData } from '@/lib/mock-data';
+import { Food } from '@/app/model/food-nutrient';
 
 const Home: React.FC = () => {
   const [foods, setFoods] = useState<Food[]>(mockFoodData);
@@ -15,15 +16,15 @@ const Home: React.FC = () => {
     setFoods([...foods, food]);
   };
 
-  const totalCalories = foods.reduce((acc, food) => acc + food.calories, 0);
-  const totalProtein = foods.reduce((acc, food) => acc + food.protein, 0);
-  const totalCarbs = foods.reduce((acc, food) => acc + food.carbs, 0);
-  const totalFat = foods.reduce((acc, food) => acc + food.fat, 0);
+  const totalCalories = foods.reduce((acc, food) => acc + (food.quantity_grams * food.macro_nutrients_per_gram.calories), 0);
+  const totalProtein = foods.reduce((acc, food) => acc + (food.quantity_grams * food.macro_nutrients_per_gram.protein), 0);
+  const totalCarbs = foods.reduce((acc, food) => acc + (food.quantity_grams * food.macro_nutrients_per_gram.carbohydrates), 0);
+  const totalFat = foods.reduce((acc, food) => acc + (food.quantity_grams * food.macro_nutrients_per_gram.fat), 0);
 
-  const breakfastFoods = foods.filter((food) => food.meal === 'Breakfast');
-  const lunchFoods = foods.filter((food) => food.meal === 'Lunch');
-  const dinnerFoods = foods.filter((food) => food.meal === 'Dinner');
-  const snackFoods = foods.filter((food) => food.meal === 'Snacks');
+  const breakfastFoods = foods.filter((food) => food.meal_type === 'Breakfast');
+  const lunchFoods = foods.filter((food) => food.meal_type === 'Lunch');
+  const dinnerFoods = foods.filter((food) => food.meal_type === 'Dinner');
+  const snackFoods = foods.filter((food) => food.meal_type === 'Snacks');
 
 
 // ... (rest of the file is the same until the return statement)

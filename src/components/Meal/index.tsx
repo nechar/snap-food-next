@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Heading } from "@chakra-ui/react";
 import FoodList from "../FoodList";
-import { Food } from "@/lib/mock-data";
+import { Food } from "@/app/model/food-nutrient";
 
 interface MealProps {
   mealName: string;

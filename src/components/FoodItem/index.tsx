@@ -1,27 +1,26 @@
 import React from "react";
 import { Box, Text, Flex } from "@chakra-ui/react";
+import { Food } from "@/app/model/food-nutrient";
 
 interface FoodItemProps {
-  name: string;
-  calories: number;
-  protein: number;
-  carbs: number;
-  fat: number;
+  food: Food;
 }
 
 const FoodItem: React.FC<FoodItemProps> = ({
-  name,
-  calories,
-  protein,
-  carbs,
-  fat,
+  food
 }) => {
+  const { food_name, quantity_grams, macro_nutrients_per_gram } = food;
+  const totalCalories = quantity_grams * macro_nutrients_per_gram.calories;
+  const totalProtein = quantity_grams * macro_nutrients_per_gram.protein;
+  const totalCarbohydrates = quantity_grams * macro_nutrients_per_gram.carbohydrates;
+  const totalFat = quantity_grams * macro_nutrients_per_gram.fat;
+
   return (
     <Flex  justifyContent="space-between" p={2} borderBottomWidth="1px">
       <Box>
-        <Text fontWeight="bold">{name}</Text>
+        <Text fontWeight="bold">{food_name}</Text>
         <Text fontSize="sm" color="gray.500">
-          {calories} kcal, {protein}g P, {carbs}g C, {fat}g F
+          {totalCalories.toFixed(0)} kcal, {totalProtein.toFixed(1)}g P, {totalCarbohydrates.toFixed(1)}g C, {totalFat.toFixed(1)}g F
         </Text>
       </Box>
     </Flex>
