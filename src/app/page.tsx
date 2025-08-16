@@ -41,6 +41,7 @@ const Home: React.FC = () => {
         totalCarbs={totalCarbs}
         totalFat={totalFat}
       />
+      {/* Individual meal details */}
       <Box mt={4}>
         <Meal mealName="Breakfast" foods={breakfastFoods} />
         <Meal mealName="Lunch" foods={lunchFoods} />
