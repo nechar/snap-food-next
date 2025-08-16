@@ -26,7 +26,8 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
   const [meal_type, setMeal] = useState("Breakfast");
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [showMacros, setShowMacros] = useState(false); // 👈 new state
+  const [showMacros, setShowMacros] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,6 +58,7 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
   };
 
   const handleFileUpload = async () => {
+    setIsUploading(true);
     if (!selectedFile) {
       alert("Please select a file first.");
       return;
@@ -91,6 +93,7 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
       console.error("Error during file upload:", error);
       alert("Error during file upload. Check console for details.");
     }
+    setIsUploading(false)
   };
 
   return (
@@ -106,15 +109,12 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
  
       {/* File upload */}
       {!showMacros && (
-      
-
       <Stack direction="row" spacing={4} align="center">
         <Input type="file" onChange={handleFileChange} p={1} />
-        <Button onClick={handleFileUpload} colorScheme="blue">
-          Upload File
+        <Button onClick={handleFileUpload} colorScheme="blue" disabled={isUploading} >
+          {isUploading? 'Uploading...': 'Add food'}
         </Button>
       </Stack>
-
       )}
 
       {/* Macro nutrient calculations (hidden until upload) */}
