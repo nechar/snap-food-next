@@ -116,31 +116,31 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
           <Input
             type="number"
             placeholder="Quantity (grams)"
-            value={quantityGrams}
+            value={quantityGrams ?? ''}
             onChange={(e) => setQuantityGrams(e.target.value === '' ? undefined : parseInt(e.target.value))}
           />
           <Input
             type="number"
             placeholder="Calories (per gram)"
-            value={caloriesPerGram}
+            value={caloriesPerGram ?? ''}
             onChange={(e) => setCaloriesPerGram(e.target.value === '' ? undefined : parseFloat(e.target.value))}
           />
           <Input
             type="number"
             placeholder="Protein (g per gram)"
-            value={proteinPerGram}
+            value={proteinPerGram ?? ''}
             onChange={(e) => setProteinPerGram(e.target.value === '' ? undefined : parseFloat(e.target.value))}
           />
           <Input
             type="number"
             placeholder="Carbs (g per gram)"
-            value={carbohydratesPerGram}
+            value={carbohydratesPerGram ?? ''}
             onChange={(e) => setCarbohydratesPerGram(e.target.value === '' ? undefined : parseFloat(e.target.value))}
           />
           <Input
             type="number"
             placeholder="Fat (g per gram)"
-            value={fatPerGram}
+            value={fatPerGram ?? ''}
             onChange={(e) => setFatPerGram(e.target.value === '' ? undefined : parseFloat(e.target.value))}
           />
           <Select value={meal_type} onChange={(e) => setMeal(e.target.value)}>
