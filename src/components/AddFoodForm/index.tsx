@@ -177,7 +177,7 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
             </Select>
           </Grid>
           <Button type="submit" mt={4} colorScheme="blue">
-            Add
+            Confirm
           </Button>
         </>
       )}
