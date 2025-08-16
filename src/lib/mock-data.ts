@@ -23,29 +23,6 @@ export const mockFoodData: Food[] = [
     },
     meal_type: 'Breakfast',
   },
- 
-  {
-    food_name: 'Salmon',
-    quantity_grams: 100,
-    macro_nutrients_per_gram: {
-      calories: 2.06,
-      protein: 0.22,
-      carbohydrates: 0,
-      fat: 0.13,
-    },
-    meal_type: 'Dinner',
-  },
-  {
-    food_name: 'Sweet Potato',
-    quantity_grams: 100,
-    macro_nutrients_per_gram: {
-      calories: 0.86,
-      protein: 0.02,
-      carbohydrates: 0.20,
-      fat: 0,
-    },
-    meal_type: 'Dinner',
-  },
   {
     food_name: 'Almonds',
     quantity_grams: 100,

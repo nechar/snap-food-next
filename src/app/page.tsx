@@ -71,8 +71,8 @@ const Home: React.FC = () => {
             <Box >
               <Meal mealName="Breakfast" foods={breakfastFoods} />
               <Meal mealName="Lunch" foods={lunchFoods} />
-              <Meal mealName="Dinner" foods={dinnerFoods} />
               <Meal mealName="Snacks" foods={snackFoods} />
+              <Meal mealName="Dinner" foods={dinnerFoods} />
             </Box>
           </AccordionPanel>
         </AccordionItem>
