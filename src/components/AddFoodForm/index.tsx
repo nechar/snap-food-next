@@ -102,16 +102,14 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
       borderRadius="lg"
       mb={4}
     >
-      <Heading as="h3" size="md" mb={2}>
-        Add Food
-      </Heading>
+
 
       {/* File upload */}
       {!showMacros && (
         <Box mb={4}>
           <Input type="file" onChange={handleFileChange} p={1} mb={2} />
           <Button onClick={handleFileUpload} colorScheme="blue">
-            Upload File
+            Add Food
           </Button>
         </Box>
       )}
