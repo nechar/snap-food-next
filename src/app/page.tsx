@@ -11,9 +11,11 @@ import { Food } from '@/app/model/food-nutrient';
 
 const Home: React.FC = () => {
   const [foods, setFoods] = useState<Food[]>(mockFoodData);
+  const [accordionIndex, setAccordionIndex] = useState<number[]>([]);
 
   const addFood = (food: Food) => {
     setFoods([...foods, food]);
+    setAccordionIndex([0, 1]); // Open both accordions
   };
 
   const totalCalories = foods.reduce((acc, food) => acc + (food.quantity_grams * food.macro_nutrients_per_gram.calories), 0);
@@ -36,7 +38,7 @@ const Home: React.FC = () => {
       </Heading>
       <AddFoodForm onAddFood={addFood} />
 
-      <Accordion allowMultiple defaultIndex={[]}>
+      <Accordion allowMultiple index={accordionIndex} onChange={(expandedIndex) => setAccordionIndex(expandedIndex as number[])}>
         <AccordionItem>
           <h2>
             <AccordionButton>
