@@ -20,21 +20,21 @@ const Summary: React.FC<SummaryProps> = ({
         Daily Summary
       </Heading>
       <Grid templateColumns="repeat(2, 1fr)" gap={2}>
-        <Box>
+        <Box mb={2}>
           <Text fontWeight="bold">Calories</Text>
-          <Text>{totalCalories} kcal</Text>
+          <Text>{totalCalories.toFixed(0)} kcal</Text>
         </Box>
-        <Box>
+        <Box mb={2}>
           <Text fontWeight="bold">Protein</Text>
-          <Text>{totalProtein} g</Text>
+          <Text>{totalProtein.toFixed(1)} g</Text>
         </Box>
-        <Box>
+        <Box mb={2}>
           <Text fontWeight="bold">Carbs</Text>
-          <Text>{totalCarbs} g</Text>
+          <Text>{totalCarbs.toFixed(1)} g</Text>
         </Box>
-        <Box>
+        <Box mb={2}>
           <Text fontWeight="bold">Fat</Text>
-          <Text>{totalFat} g</Text>
+          <Text>{totalFat.toFixed(1)} g</Text>
         </Box>
       </Grid>
     </Box>

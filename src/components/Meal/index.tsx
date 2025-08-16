@@ -10,7 +10,7 @@ interface MealProps {
 
 const Meal: React.FC<MealProps> = ({ mealName, foods }) => {
   return (
-    <Box mb={4}>
+    <Box p={4} borderWidth="1px" borderRadius="lg" mb={4}>
       <Heading as="h2" size="lg" mb={2}>
         {mealName}
       </Heading>

@@ -16,23 +16,13 @@ const FoodItem: React.FC<FoodItemProps> = ({
   const totalFat = quantity_grams * macro_nutrients_per_gram.fat;
 
   return (
-    <Flex  justifyContent="space-between" p={2} >
+    <Flex justifyContent="space-between" alignItems="center" py={2} px={4} borderBottomWidth="1px">
       <Box>
-  <Text fontWeight="bold">{food_name}</Text>
-  <Text fontSize="sm" color="gray.500">
-    {totalCalories.toFixed(0)} kcal
-  </Text>
-  <Text fontSize="sm" color="gray.500">
-    {totalProtein.toFixed(1)}g Protein
-  </Text>
-  <Text fontSize="sm" color="gray.500">
-    {totalCarbohydrates.toFixed(1)}g Carb
-  </Text>
-  <Text fontSize="sm" color="gray.500">
-    {totalFat.toFixed(1)}g Fat
-  </Text>
-</Box>
-
+        <Text fontWeight="bold">{food_name}</Text>
+        <Text fontSize="sm" color="gray.500">
+          {totalCalories.toFixed(0)} kcal, {totalProtein.toFixed(1)}g Protein, {totalCarbohydrates.toFixed(1)}g Carbohydrates, {totalFat.toFixed(1)}g Fat
+        </Text>
+      </Box>
     </Flex>
   );
 };

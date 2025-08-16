@@ -1,7 +1,7 @@
 
 'use client';
 
-  import { Box, Heading, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon } from '@chakra-ui/react';
+  import { Box, Heading, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Container } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import Meal from '@/components/Meal';
 import Summary from '@/components/Summary';
@@ -32,8 +32,8 @@ const Home: React.FC = () => {
 // ... (rest of the file is the same until the return statement)
 
   return (
-    <Box p={4}>
-      <Heading as="h1" size="xl" mb={4}>
+    <Container maxW="container.md" p={4}>
+      <Heading as="h1" size="xl" mb={4} textAlign="center">
         Food Log
       </Heading>
       <AddFoodForm onAddFood={addFood} />
@@ -55,6 +55,19 @@ const Home: React.FC = () => {
               totalCarbs={totalCarbs}
               totalFat={totalFat}
             />
+          </AccordionPanel>
+        </AccordionItem>
+
+        <AccordionItem>
+          <h2>
+            <AccordionButton>
+              <Box as="span" flex="1" textAlign="left">
+                Individual Meal Details
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+          </h2>
+          <AccordionPanel pb={4}>
             <Box mt={4}>
               <Meal mealName="Breakfast" foods={breakfastFoods} />
               <Meal mealName="Lunch" foods={lunchFoods} />
@@ -63,10 +76,8 @@ const Home: React.FC = () => {
             </Box>
           </AccordionPanel>
         </AccordionItem>
-
-       
       </Accordion>
-    </Box>
+    </Container>
   );
 };
 
