@@ -1,7 +1,7 @@
 
 'use client';
 
-  import { Box, Heading } from '@chakra-ui/react';
+  import { Box, Heading, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import Meal from '@/components/Meal';
 import Summary from '@/components/Summary';
@@ -35,19 +35,46 @@ const Home: React.FC = () => {
         Food Log
       </Heading>
       <AddFoodForm onAddFood={addFood} />
-      <Summary
-        totalCalories={totalCalories}
-        totalProtein={totalProtein}
-        totalCarbs={totalCarbs}
-        totalFat={totalFat}
-      />
-      {/* Individual meal details */}
-      <Box mt={4}>
-        <Meal mealName="Breakfast" foods={breakfastFoods} />
-        <Meal mealName="Lunch" foods={lunchFoods} />
-        <Meal mealName="Dinner" foods={dinnerFoods} />
-        <Meal mealName="Snacks" foods={snackFoods} />
-      </Box>
+
+      <Accordion allowMultiple defaultIndex={[]}>
+        <AccordionItem>
+          <h2>
+            <AccordionButton>
+              <Box as="span" flex="1" textAlign="left">
+                Summary
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+          </h2>
+          <AccordionPanel pb={4}>
+            <Summary
+              totalCalories={totalCalories}
+              totalProtein={totalProtein}
+              totalCarbs={totalCarbs}
+              totalFat={totalFat}
+            />
+          </AccordionPanel>
+        </AccordionItem>
+
+        <AccordionItem>
+          <h2>
+            <AccordionButton>
+              <Box as="span" flex="1" textAlign="left">
+                Individual Meal Details
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+          </h2>
+          <AccordionPanel pb={4}>
+            <Box mt={4}>
+              <Meal mealName="Breakfast" foods={breakfastFoods} />
+              <Meal mealName="Lunch" foods={lunchFoods} />
+              <Meal mealName="Dinner" foods={dinnerFoods} />
+              <Meal mealName="Snacks" foods={snackFoods} />
+            </Box>
+          </AccordionPanel>
+        </AccordionItem>
+      </Accordion>
     </Box>
   );
 };
