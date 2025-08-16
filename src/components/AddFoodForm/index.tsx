@@ -139,14 +139,12 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
               )
             }
           />
-
+          {/* Macro nutrients */}
           <Text>Calories (per gram): {caloriesPerGram ?? "-"}</Text>
-
           <Text>Protein (g per gram): {proteinPerGram ?? "-"}</Text>
-
           <Text>Carbs (g per gram): {carbohydratesPerGram ?? "-"}</Text>
-
           <Text>Fat (g per gram): {fatPerGram ?? "-"}</Text>
+
         </Grid>
 
         <Button type="submit" mt={4} colorScheme="blue">
