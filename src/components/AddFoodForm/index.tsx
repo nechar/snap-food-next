@@ -102,7 +102,7 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
       borderRadius="lg"
       mb={4}
     >
-      <Heading as="h2" size="lg" mb={2}>
+      <Heading as="h3" size="md" mb={2}>
         Add Food
       </Heading>
 
