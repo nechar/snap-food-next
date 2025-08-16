@@ -109,12 +109,15 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
  
       {/* File upload */}
       {!showMacros && (
-      <Stack direction="row" spacing={4} align="center">
+      <Box>
+        <Text margin={1}>What did you eat today?</Text>
+        <Stack direction="row" spacing={4} align="center">
         <Input type="file" onChange={handleFileChange} p={1} />
-        <Button onClick={handleFileUpload} colorScheme="blue" disabled={isUploading} >
-          {isUploading? 'Uploading...': 'Add food'}
+        <Button width={'100px'} onClick={handleFileUpload} colorScheme="blue" disabled={isUploading || !selectedFile} >
+          {isUploading? 'Uploading...': 'Upload'}
         </Button>
       </Stack>
+        </Box>
       )}
 
       {/* Macro nutrient calculations (hidden until upload) */}
