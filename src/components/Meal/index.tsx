@@ -30,7 +30,7 @@ const Meal: React.FC<MealProps> = ({ mealName, foods }) => {
         </Grid>
       ) : (
         <Text  color={"gray.500"}>
-          Not loggged yet
+          Nothing loggged yet
           </Text>
       )}
     </Box>
