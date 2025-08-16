@@ -122,29 +122,34 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
             value={foodName}
             onChange={(e) => setFoodName(e.target.value)}
           />
+          <Input
+            type="number"
+            placeholder="Quantity (grams)"
+            value={quantityGrams ?? ''}
+            onChange={(e) => setQuantityGrams(e.target.value === '' ? undefined : parseInt(e.target.value))}
+          />
+          <Box>
+            <Text fontWeight="bold">Calories:</Text>
+            <Text>{caloriesPerGram ?? '-'} per gram / {( (caloriesPerGram || 0) * (quantityGrams || 0) ).toFixed(0)} total</Text>
+          </Box>
+          <Box>
+            <Text fontWeight="bold">Protein:</Text>
+            <Text>{proteinPerGram ?? '-'} per gram / {( (proteinPerGram || 0) * (quantityGrams || 0) ).toFixed(1)} total</Text>
+          </Box>
+          <Box>
+            <Text fontWeight="bold">Carbohydrates:</Text>
+            <Text>{carbohydratesPerGram ?? '-'} per gram / {( (carbohydratesPerGram || 0) * (quantityGrams || 0) ).toFixed(1)} total</Text>
+          </Box>
+          <Box>
+            <Text fontWeight="bold">Fat:</Text>
+            <Text>{fatPerGram ?? '-'} per gram / {( (fatPerGram || 0) * (quantityGrams || 0) ).toFixed(1)} total</Text>
+          </Box>
           <Select value={meal_type} onChange={(e) => setMeal(e.target.value)}>
             <option value="Breakfast">Breakfast</option>
             <option value="Lunch">Lunch</option>
             <option value="Dinner">Dinner</option>
             <option value="Snacks">Snacks</option>
           </Select>
-          <Input
-            type="number"
-            readOnly={true}
-            placeholder="Quantity (grams)"
-            value={quantityGrams ?? ""}
-            onChange={(e) =>
-              setQuantityGrams(
-                e.target.value === "" ? undefined : parseInt(e.target.value)
-              )
-            }
-          />
-          {/* Macro nutrients */}
-          <Text>Calories (per gram): {caloriesPerGram ?? "-"}</Text>
-          <Text>Protein (g per gram): {proteinPerGram ?? "-"}</Text>
-          <Text>Carbs (g per gram): {carbohydratesPerGram ?? "-"}</Text>
-          <Text>Fat (g per gram): {fatPerGram ?? "-"}</Text>
-
         </Grid>
 
         <Button type="submit" mt={4} colorScheme="blue">
