@@ -110,7 +110,7 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
       {!showMacros && (
         <Box mb={4}>
           <Input type="file" onChange={handleFileChange} p={1} mb={2} />
-          <Button onClick={handleFileUpload} colorScheme="teal">
+          <Button onClick={handleFileUpload} colorScheme="blue">
             Upload File
           </Button>
         </Box>
@@ -136,7 +136,7 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
                 )
               }
             />
-            <Box>
+            <Box ml={2}>
               <Text fontWeight="bold">Calories:</Text>
               <Text>
                 {caloriesPerGram ?? "-"} per gram /{" "}
@@ -144,7 +144,7 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
                 total
               </Text>
             </Box>
-            <Box>
+            <Box ml={2}>
               <Text fontWeight="bold">Protein:</Text>
               <Text>
                 {proteinPerGram ?? "-"} per gram /{" "}
@@ -152,7 +152,7 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
                 total
               </Text>
             </Box>
-            <Box>
+            <Box ml={2}>
               <Text fontWeight="bold">Carbohydrates:</Text>
               <Text>
                 {carbohydratesPerGram ?? "-"} per gram /{" "}
@@ -162,7 +162,7 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
                 total
               </Text>
             </Box>
-            <Box>
+            <Box ml={2}>
               <Text fontWeight="bold">Fat:</Text>
               <Text>
                 {fatPerGram ?? "-"} per gram /{" "}
@@ -183,6 +183,7 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
              
           <Button
             mt={4}
+            ml={5}
             colorScheme="red"
             variant="outline"
             onClick={() => {
