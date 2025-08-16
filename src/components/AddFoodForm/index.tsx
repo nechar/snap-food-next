@@ -107,41 +107,12 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
           Add Food
         </Heading>
         <Grid templateColumns="repeat(2, 1fr)" gap={2}>
+          
           <Input
             type="text"
             placeholder="Food name"
             value={foodName}
             onChange={(e) => setFoodName(e.target.value)}
-          />
-          <Input
-            type="number"
-            placeholder="Quantity (grams)"
-            value={quantityGrams ?? ''}
-            onChange={(e) => setQuantityGrams(e.target.value === '' ? undefined : parseInt(e.target.value))}
-          />
-          <Input
-            type="number"
-            placeholder="Calories (per gram)"
-            value={caloriesPerGram ?? ''}
-            onChange={(e) => setCaloriesPerGram(e.target.value === '' ? undefined : parseFloat(e.target.value))}
-          />
-          <Input
-            type="number"
-            placeholder="Protein (g per gram)"
-            value={proteinPerGram ?? ''}
-            onChange={(e) => setProteinPerGram(e.target.value === '' ? undefined : parseFloat(e.target.value))}
-          />
-          <Input
-            type="number"
-            placeholder="Carbs (g per gram)"
-            value={carbohydratesPerGram ?? ''}
-            onChange={(e) => setCarbohydratesPerGram(e.target.value === '' ? undefined : parseFloat(e.target.value))}
-          />
-          <Input
-            type="number"
-            placeholder="Fat (g per gram)"
-            value={fatPerGram ?? ''}
-            onChange={(e) => setFatPerGram(e.target.value === '' ? undefined : parseFloat(e.target.value))}
           />
           <Select value={meal_type} onChange={(e) => setMeal(e.target.value)}>
             <option value="Breakfast">Breakfast</option>
@@ -149,6 +120,43 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
             <option value="Dinner">Dinner</option>
             <option value="Snacks">Snacks</option>
           </Select>
+          <Input
+            type="number"
+            readOnly={true}
+            placeholder="Quantity (grams)"
+            value={quantityGrams ?? ''}
+            onChange={(e) => setQuantityGrams(e.target.value === '' ? undefined : parseInt(e.target.value))}
+          />
+
+          <Input
+            type="number"
+            readOnly={true}
+            placeholder="Calories (per gram)"
+            value={caloriesPerGram ?? ''}
+            onChange={(e) => setCaloriesPerGram(e.target.value === '' ? undefined : parseFloat(e.target.value))}
+          />
+          <Input
+            type="number"
+            readOnly={true}
+            placeholder="Protein (g per gram)"
+            value={proteinPerGram ?? ''}
+            onChange={(e) => setProteinPerGram(e.target.value === '' ? undefined : parseFloat(e.target.value))}
+          />
+          <Input
+            type="number"
+            readOnly={true}
+            placeholder="Carbs (g per gram)"
+            value={carbohydratesPerGram ?? ''}
+            onChange={(e) => setCarbohydratesPerGram(e.target.value === '' ? undefined : parseFloat(e.target.value))}
+          />
+          <Input
+            type="number"
+            readOnly={true}
+            placeholder="Fat (g per gram)"
+            value={fatPerGram ?? ''}
+            onChange={(e) => setFatPerGram(e.target.value === '' ? undefined : parseFloat(e.target.value))}
+          />
+          
         </Grid>
 
         <Button type="submit" mt={4} colorScheme="blue">
