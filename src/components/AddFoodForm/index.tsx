@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import {
   Box,
-  Heading,
   Grid,
+  Stack,
   Input,
   Select,
   Button,
@@ -103,15 +103,18 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
       mb={4}
     >
 
-
+ 
       {/* File upload */}
       {!showMacros && (
-        <Box mb={4}>
-          <Input type="file" onChange={handleFileChange} p={1} mb={2} />
-          <Button onClick={handleFileUpload} colorScheme="blue">
-            Add Food
-          </Button>
-        </Box>
+      
+
+      <Stack direction="row" spacing={4} align="center">
+        <Input type="file" onChange={handleFileChange} p={1} />
+        <Button onClick={handleFileUpload} colorScheme="blue">
+          Upload File
+        </Button>
+      </Stack>
+
       )}
 
       {/* Macro nutrient calculations (hidden until upload) */}
