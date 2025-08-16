@@ -16,7 +16,7 @@ const FoodItem: React.FC<FoodItemProps> = ({
   const totalFat = quantity_grams * macro_nutrients_per_gram.fat;
 
   return (
-    <Flex justifyContent="space-between" alignItems="center" py={2} px={4} borderBottomWidth="1px">
+    <Flex justifyContent="space-between" alignItems="center" py={2} px={4} >
       <Box>
         <Text fontWeight="bold">{food_name}</Text>
         <Text fontSize="sm" color="gray.500">

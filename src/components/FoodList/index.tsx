@@ -10,7 +10,7 @@ interface FoodListProps {
 const FoodList: React.FC<FoodListProps> = ({ foods }) => {
   return (
 
-    <Grid templateColumns="repeat(6, 1fr)" gap={2}>
+    <Grid templateColumns="repeat(3, 1fr)" gap={2}>
       {foods.map((food, index) => (
         <FoodItem key={index} food={food} />
       ))}
