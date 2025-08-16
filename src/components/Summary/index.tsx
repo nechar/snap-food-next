@@ -16,9 +16,6 @@ const Summary: React.FC<SummaryProps> = ({
 }) => {
   return (
     <Box p={4} borderWidth="1px" borderRadius="lg">
-      <Heading as="h2" size="lg" mb={2}>
-        Daily Summary
-      </Heading>
       <Grid templateColumns="repeat(2, 1fr)" gap={2}>
         <Box mb={2}>
           <Text fontWeight="bold">Calories</Text>

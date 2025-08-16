@@ -43,7 +43,7 @@ const Home: React.FC = () => {
           <h2>
             <AccordionButton>
               <Box as="span" flex="1" textAlign="left">
-                Summary
+                Daily Summary
               </Box>
               <AccordionIcon />
             </AccordionButton>
