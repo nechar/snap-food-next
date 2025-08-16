@@ -61,20 +61,20 @@ Example Response:
     console.log("🚀 ~ POST ~ text:", text)
 
     // Clean the response to ensure it's valid JSON
-    // const cleanedText = text
-    //   .replace(/```json/g, '')
-    //   .replace(/```/g, '')
-    //   .trim();
+    const cleanedText = text
+      .replace(/```json/g, '')
+      .replace(/```/g, '')
+      .trim();
 
-    // let parsedData;
-    // try {
-    //   parsedData = JSON.parse(cleanedText);
-    // } catch (parseError) {
-    //   console.error('JSON parsing error:', parseError);
-    //   return NextResponse.json({ error: 'Invalid response format from AI model.' }, { status: 500 });
-    // }
+    let parsedData;
+    try {
+      parsedData = JSON.parse(cleanedText);
+    } catch (parseError) {
+      console.error('JSON parsing error:', parseError);
+      return NextResponse.json({ error: 'Invalid response format from AI model.' }, { status: 500 });
+    }
 
-    return NextResponse.json('parsedData');
+    return NextResponse.json(parsedData);
   } catch (error) {
     console.error('Error analyzing image:', error);
     return NextResponse.json({ error: 'Error analyzing the image.' }, { status: 500 });
