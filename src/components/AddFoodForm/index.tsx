@@ -7,7 +7,25 @@ import {
   Select,
   Button,
   Text,
+  FormControl,
+  FormLabel,
+  InputGroup,
+  InputLeftElement,
+  Spinner,
+  Alert,
+  AlertIcon,
+  CloseButton,
+  VStack,
+  HStack,
 } from "@chakra-ui/react";
+import {
+  FaUtensils,
+  FaWeight,
+  FaFire,
+  FaDrumstickBite,
+  FaBreadSlice,
+  FaHamburger,
+} from "react-icons/fa";
 import { Food, FoodNutrient } from "@/app/model/food-nutrient";
 
 interface AddFoodFormProps {
@@ -28,6 +46,7 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [showMacros, setShowMacros] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,13 +73,16 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       setSelectedFile(event.target.files[0]);
+      setError(null); // Clear any previous errors
     }
   };
 
   const handleFileUpload = async () => {
     setIsUploading(true);
+    setError(null); // Clear any previous errors
     if (!selectedFile) {
-      alert("Please select a file first.");
+      setError("Please select a file first.");
+      setIsUploading(false);
       return;
     }
 
@@ -88,77 +110,142 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
       } else {
         const errorData = await response.json();
         console.error("File upload failed:", response.status, errorData);
+        setError(
+          errorData.message || "Failed to analyze food. Please try again."
+        );
       }
     } catch (error) {
       console.error("Error during file upload:", error);
-      alert("Error during file upload. Check console for details.");
+      setError("Error during file upload. Check console for details.");
     }
-    setIsUploading(false)
+    setIsUploading(false);
+  };
+
+  const handleCancel = () => {
+    setFoodName("");
+    setQuantityGrams(undefined);
+    setCaloriesPerGram(undefined);
+    setProteinPerGram(undefined);
+    setCarbohydratesPerGram(undefined);
+    setFatPerGram(undefined);
+    setMeal("Breakfast");
+    setSelectedFile(null);
+    setShowMacros(false);
+    setError(null);
   };
 
   return (
-    <Box
-      as="form"
-      onSubmit={handleSubmit}
-      p={4}
-      borderWidth="1px"
-      borderRadius="lg"
-      mb={4}
-    >
-
- 
-      {/* File upload */}
+    <Box as="form" onSubmit={handleSubmit} p={6} borderRadius="lg" bg="white" boxShadow="md">
       {!showMacros && (
-      <Box>
-        <Text margin={1}>What did you eat today?</Text>
-        <Stack direction="row" spacing={4} align="center">
-        <Input type="file" onChange={handleFileChange} p={1} />
-        <Button width={'100px'} onClick={handleFileUpload} colorScheme="blue" disabled={isUploading || !selectedFile} >
-          {isUploading? 'Uploading...': 'Upload'}
-        </Button>
-      </Stack>
-        </Box>
+        <VStack spacing={4} align="stretch">
+          <Text fontSize="xl" fontWeight="bold" mb={2} color="gray.700">
+            What did you eat today?
+          </Text>
+          <FormControl>
+            <FormLabel htmlFor="food-image">Upload Food Image</FormLabel>
+            <HStack spacing={3}>
+              <Input
+                id="food-image"
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                p={1}
+                border="1px"
+                borderColor="gray.300"
+                borderRadius="md"
+              />
+              <Button
+                onClick={handleFileUpload}
+                colorScheme="brand"
+                isLoading={isUploading}
+                isDisabled={!selectedFile}
+                leftIcon={isUploading ? undefined : <FaUtensils />}
+              >
+                {isUploading ? "Uploading..." : "Analyze"}
+              </Button>
+            </HStack>
+            {error && (
+              <Alert status="error" mt={3} borderRadius="md">
+                <AlertIcon />
+                {error}
+              </Alert>
+            )}
+          </FormControl>
+        </VStack>
       )}
 
-      {/* Macro nutrient calculations (hidden until upload) */}
       {showMacros && (
-        <>
-          <Grid templateColumns="repeat(2, 1fr)" gap={2}>
-            <Input
-              type="text"
-              placeholder="Food name"
-              value={foodName}
-              onChange={(e) => setFoodName(e.target.value)}
-            />
-            <Input
-              type="number"
-              placeholder="Quantity (grams)"
-              value={quantityGrams ?? ""}
-              onChange={(e) =>
-                setQuantityGrams(
-                  e.target.value === "" ? undefined : parseInt(e.target.value)
-                )
-              }
-            />
-            <Box ml={2}>
-              <Text fontWeight="bold">Calories:</Text>
-              <Text>
+        <VStack spacing={4} align="stretch">
+          <HStack justifyContent="space-between" alignItems="center">
+            <Text fontSize="xl" fontWeight="bold" color="gray.700">
+              Confirm Food Details
+            </Text>
+            <CloseButton onClick={handleCancel} />
+          </HStack>
+
+          <FormControl id="food-name">
+            <FormLabel>Food Name</FormLabel>
+            <InputGroup>
+              <InputLeftElement pointerEvents="none">
+                <FaUtensils color="gray.300" />
+              </InputLeftElement>
+              <Input
+                type="text"
+                placeholder="e.g., Apple"
+                value={foodName}
+                onChange={(e) => setFoodName(e.target.value)}
+              />
+            </InputGroup>
+          </FormControl>
+
+          <FormControl id="quantity-grams">
+            <FormLabel>Quantity (grams)</FormLabel>
+            <InputGroup>
+              <InputLeftElement pointerEvents="none">
+                <FaWeight color="gray.300" />
+              </InputLeftElement>
+              <Input
+                type="number"
+                placeholder="e.g., 150"
+                value={quantityGrams ?? ""}
+                onChange={(e) =>
+                  setQuantityGrams(
+                    e.target.value === "" ? undefined : parseInt(e.target.value)
+                  )
+                }
+              />
+            </InputGroup>
+          </FormControl>
+
+          <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={4}>
+            <Box p={3} bg="gray.50" borderRadius="md">
+              <HStack>
+                <FaFire color="orange.400" />
+                <Text fontWeight="bold">Calories:</Text>
+              </HStack>
+              <Text ml={6}>
                 {caloriesPerGram ?? "-"} per gram /{" "}
                 {((caloriesPerGram || 0) * (quantityGrams || 0)).toFixed(0)}{" "}
                 total
               </Text>
             </Box>
-            <Box ml={2}>
-              <Text fontWeight="bold">Protein:</Text>
-              <Text>
+            <Box p={3} bg="gray.50" borderRadius="md">
+              <HStack>
+                <FaDrumstickBite color="brown.400" />
+                <Text fontWeight="bold">Protein:</Text>
+              </HStack>
+              <Text ml={6}>
                 {proteinPerGram ?? "-"} per gram /{" "}
                 {((proteinPerGram || 0) * (quantityGrams || 0)).toFixed(1)}{" "}
                 total
               </Text>
             </Box>
-            <Box ml={2}>
-              <Text fontWeight="bold">Carbohydrates:</Text>
-              <Text>
+            <Box p={3} bg="gray.50" borderRadius="md">
+              <HStack>
+                <FaBreadSlice color="yellow.600" />
+                <Text fontWeight="bold">Carbohydrates:</Text>
+              </HStack>
+              <Text ml={6}>
                 {carbohydratesPerGram ?? "-"} per gram /{" "}
                 {((carbohydratesPerGram || 0) * (quantityGrams || 0)).toFixed(
                   1
@@ -166,46 +253,37 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
                 total
               </Text>
             </Box>
-            <Box ml={2}>
-              <Text fontWeight="bold">Fat:</Text>
-              <Text>
+            <Box p={3} bg="gray.50" borderRadius="md">
+              <HStack>
+                <FaHamburger color="green.600" />
+                <Text fontWeight="bold">Fat:</Text>
+              </HStack>
+              <Text ml={6}>
                 {fatPerGram ?? "-"} per gram /{" "}
                 {((fatPerGram || 0) * (quantityGrams || 0)).toFixed(1)} total
               </Text>
             </Box>
+          </Grid>
+
+          <FormControl id="meal-type">
+            <FormLabel>Meal Type</FormLabel>
             <Select value={meal_type} onChange={(e) => setMeal(e.target.value)}>
               <option value="Breakfast">Breakfast</option>
               <option value="Lunch">Lunch</option>
               <option value="Dinner">Dinner</option>
               <option value="Snacks">Snacks</option>
             </Select>
-          </Grid>
-          <Button type="submit" mt={4} colorScheme="blue">
-            Confirm
-          </Button>
+          </FormControl>
 
-             
-          <Button
-            mt={4}
-            ml={5}
-            colorScheme="red"
-            variant="outline"
-            onClick={() => {
-              setFoodName("");
-              setQuantityGrams(undefined);
-              setCaloriesPerGram(undefined);
-              setProteinPerGram(undefined);
-              setCarbohydratesPerGram(undefined);
-              setFatPerGram(undefined);
-              setMeal("Breakfast");
-              setSelectedFile(null);
-              setShowMacros(false);
-            }}
-          >
-            Cancel
-          </Button>
-
-        </>
+          <HStack spacing={4} justifyContent="flex-end">
+            <Button type="submit" colorScheme="brand" size="lg">
+              Confirm
+            </Button>
+            <Button variant="outline" onClick={handleCancel} size="lg">
+              Cancel
+            </Button>
+          </HStack>
+        </VStack>
       )}
     </Box>
   );

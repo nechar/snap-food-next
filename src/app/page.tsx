@@ -32,17 +32,19 @@ const Home: React.FC = () => {
 // ... (rest of the file is the same until the return statement)
 
   return (
-    <Container maxW="container.md" p={4}>
-      <Heading as="h1" size="xl" mb={4} textAlign="center">
+    <Container maxW="container.lg" py={8}>
+      <Heading as="h1" size="2xl" mb={6} textAlign="center" color="brand.600">
         Food Log
       </Heading>
-      <AddFoodForm onAddFood={addFood} />
+      <Box mb={8}>
+        <AddFoodForm onAddFood={addFood} />
+      </Box>
 
-      <Accordion allowMultiple index={accordionIndex} onChange={(expandedIndex) => setAccordionIndex(expandedIndex as number[])}>
+      <Accordion allowMultiple index={accordionIndex} onChange={(expandedIndex) => setAccordionIndex(expandedIndex as number[])} mt={8}>
         <AccordionItem>
           <h2>
-            <AccordionButton>
-              <Box as="span" flex="1" textAlign="left">
+            <AccordionButton _expanded={{ bg: 'brand.500', color: 'white' }}>
+              <Box as="span" flex="1" textAlign="left" fontWeight="bold">
                 Daily Summary
               </Box>
               <AccordionIcon />
@@ -60,15 +62,15 @@ const Home: React.FC = () => {
 
         <AccordionItem>
           <h2>
-            <AccordionButton>
-              <Box as="span" flex="1" textAlign="left">
+            <AccordionButton _expanded={{ bg: 'brand.500', color: 'white' }}>
+              <Box as="span" flex="1" textAlign="left" fontWeight="bold">
                 Individual Meal Details
               </Box>
               <AccordionIcon />
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            <Box >
+            <Box>
               <Meal mealName="Breakfast" foods={breakfastFoods} />
               <Meal mealName="Lunch" foods={lunchFoods} />
               <Meal mealName="Snacks" foods={snackFoods} />

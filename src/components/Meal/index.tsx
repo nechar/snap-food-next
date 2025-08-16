@@ -1,8 +1,6 @@
 import React from "react";
-import { Box, Heading,Text } from "@chakra-ui/react";
+import { Box, Heading, Text, VStack, SimpleGrid } from "@chakra-ui/react";
 import { Food } from "@/app/model/food-nutrient";
-
-import { Grid } from "@chakra-ui/react";
 import FoodItem from "../FoodItem";
 
 interface MealProps {
@@ -12,26 +10,20 @@ interface MealProps {
 
 const Meal: React.FC<MealProps> = ({ mealName, foods }) => {
   return (
-    <Box p={4} borderWidth="1px" borderRadius="lg" mb={4}>
-      <Heading as="h3" size="md" mb={2}>
+    <Box p={4} bg="gray.50" borderRadius="lg" mb={4}>
+      <Heading as="h3" size="lg" mb={4} color="brand.700">
         {mealName}
       </Heading>
       {foods.length > 0 ? (
-        <Grid
-          templateColumns="repeat(3, 1fr)"
-          gap={4}
-          alignItems="start" // ensures all items align at the top
-        >
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={4}>
           {foods.map((food, index) => (
-            <Box key={index} h="100%">
-              <FoodItem food={food} />
-            </Box>
+            <FoodItem key={index} food={food} />
           ))}
-        </Grid>
+        </SimpleGrid>
       ) : (
-        <Text  color={"gray.500"}>
-          Nothing loggged yet
-          </Text>
+        <Text color="gray.500" fontStyle="italic">
+          No food logged for {mealName} yet.
+        </Text>
       )}
     </Box>
   );
