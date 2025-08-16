@@ -55,19 +55,6 @@ const Home: React.FC = () => {
               totalCarbs={totalCarbs}
               totalFat={totalFat}
             />
-          </AccordionPanel>
-        </AccordionItem>
-
-        <AccordionItem>
-          <h2>
-            <AccordionButton>
-              <Box as="span" flex="1" textAlign="left">
-                Individual Meal Details
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h2>
-          <AccordionPanel pb={4}>
             <Box mt={4}>
               <Meal mealName="Breakfast" foods={breakfastFoods} />
               <Meal mealName="Lunch" foods={lunchFoods} />
@@ -76,6 +63,8 @@ const Home: React.FC = () => {
             </Box>
           </AccordionPanel>
         </AccordionItem>
+
+       
       </Accordion>
     </Box>
   );

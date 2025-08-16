@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@chakra-ui/react";
+import { Grid } from "@chakra-ui/react";
 import FoodItem from "../FoodItem";
 import { Food } from "@/app/model/food-nutrient";
 
@@ -9,11 +9,12 @@ interface FoodListProps {
 
 const FoodList: React.FC<FoodListProps> = ({ foods }) => {
   return (
-    <Box>
+
+    <Grid templateColumns="repeat(6, 1fr)" gap={2}>
       {foods.map((food, index) => (
         <FoodItem key={index} food={food} />
       ))}
-    </Box>
+    </Grid>
   );
 };
 
