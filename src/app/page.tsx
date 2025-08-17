@@ -1,7 +1,7 @@
 
 'use client';
 
-  import { Box, Heading, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Container } from '@chakra-ui/react';
+  import { Box, Heading, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Container, Image } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import Meal from '@/components/Meal';
 import Summary from '@/components/Summary';
@@ -33,9 +33,12 @@ const Home: React.FC = () => {
 
   return (
     <Container maxW="container.lg" py={8}>
-      <Heading as="h1" size="2xl" mb={6} textAlign="center" color="brand.600">
-        Food Log
-      </Heading>
+      <Box textAlign="center" mb={6}>
+        <Image src="/static/logo.svg" alt="SnapFood Logo" boxSize="100px" mx="auto" mb={4} />
+        <Heading as="h1" size="2xl" color="brand.600">
+          Food Log
+        </Heading>
+      </Box>
       <Box mb={8}>
         <AddFoodForm onAddFood={addFood} />
       </Box>
