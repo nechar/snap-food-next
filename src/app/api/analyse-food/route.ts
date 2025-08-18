@@ -18,7 +18,8 @@ export async function POST(request: Request) {
     const prompt = `
 Analyze the food shown in the provided image.
 
-If multiple food items are present, identify the most prominent one based on visual dominance (e.g., largest portion, central placement, or clearest visibility). If no food is present or the image is unclear, state this explicitly and end the analysis.
+If multiple food items are present, identify the most prominent one based on visual dominance (e.g., largest portion, central placement, or clearest visibility).
+If no food is present or the image is unclear, state this explicitly and end the analysis.
 
 For the identified food item, provide the following details in a JSON object:
 - "food_name": A specific name for the food item (e.g., "Grilled Chicken Breast" instead of just "Chicken").
