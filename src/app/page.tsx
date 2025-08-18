@@ -10,7 +10,7 @@ import { mockFoodData } from '@/lib/mock-data';
 import { Food } from '@/app/model/food-nutrient';
 
 const Home: React.FC = () => {
-  const [foods, setFoods] = useState<Food[]>(mockFoodData);
+  const [foods, setFoods] = useState<Food[]>([]);
   const [accordionIndex, setAccordionIndex] = useState<number[]>([]);
 
   const addFood = (food: Food) => {
