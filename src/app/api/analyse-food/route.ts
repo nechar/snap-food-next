@@ -64,15 +64,14 @@ Example Response:
       .replace(/```/g, '')
       .trim();
 
-    let parsedData;
     try {
-      parsedData = JSON.parse(cleanedText);
+      const parsedData = JSON.parse(cleanedText);
+      return NextResponse.json(parsedData);
     } catch (parseError) {
       console.error('JSON parsing error:', parseError);
       return NextResponse.json({ error: 'Invalid response format from AI model.' }, { status: 500 });
     }
 
-    return NextResponse.json(parsedData);
   } catch (error) {
     console.error('Error analyzing image:', error);
     return NextResponse.json({ error: 'Error analyzing the image.' }, { status: 500 });
