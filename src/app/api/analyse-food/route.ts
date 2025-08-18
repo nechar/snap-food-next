@@ -58,8 +58,6 @@ Example Response:
     const result = await model.generateContent([prompt, imagePart]);
     const response = await result.response;
     const text = response.text();
-    console.log("🚀 ~ POST ~ text:", text)
-
     // Clean the response to ensure it's valid JSON
     const cleanedText = text
       .replace(/```json/g, '')
