@@ -8,6 +8,7 @@ import Summary from '@/components/Summary';
 import AddFoodForm from '@/components/AddFoodForm';
 import { mockFoodData } from '@/lib/mock-data';
 import { Food } from '@/app/model/food-nutrient';
+import CollectUserInformation from '@/components/CollectUserInformation';
 
 const Home: React.FC = () => {
   const [foods, setFoods] = useState<Food[]>([]);
@@ -39,6 +40,7 @@ const Home: React.FC = () => {
           Food Log
         </Heading>
       </Box>
+      <CollectUserInformation  onSave={()=>{}}/>
       <Box mb={8}>
         <AddFoodForm onAddFood={addFood} />
       </Box>
