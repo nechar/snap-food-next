@@ -1,11 +1,14 @@
+'use client';
+
 import React from 'react';
+import MainLayout from '@/components/Layout';
+import CollectUserInformation from '@/components/CollectUserInformation';
 
 const CollectUserInformationPage = () => {
   return (
-    <div>
-      <h1>Collect User Information</h1>
-      <p>This page is under construction.</p>
-    </div>
+    <MainLayout title="User Information">
+      <CollectUserInformation onSave={() => {}} />
+    </MainLayout>
   );
 };
 

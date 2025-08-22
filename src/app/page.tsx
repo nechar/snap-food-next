@@ -1,14 +1,13 @@
 
 'use client';
 
-  import { Box, Heading, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Container, Image } from '@chakra-ui/react';
+  import { Box, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import Meal from '@/components/Meal';
 import Summary from '@/components/Summary';
 import AddFoodForm from '@/components/AddFoodForm';
-import { mockFoodData } from '@/lib/mock-data';
 import { Food } from '@/app/model/food-nutrient';
-import CollectUserInformation from '@/components/CollectUserInformation';
+import MainLayout from '@/components/Layout';
 
 const Home: React.FC = () => {
   const [foods, setFoods] = useState<Food[]>([]);
@@ -33,14 +32,7 @@ const Home: React.FC = () => {
 // ... (rest of the file is the same until the return statement)
 
   return (
-    <Container maxW="container.lg" py={8}>
-      <Box textAlign="center" mb={6}>
-        <Image src="/static/logo.svg" alt="SnapFood Logo" boxSize="100px" mx="auto" mb={4} />
-        <Heading as="h1" size="2xl" color="brand.600">
-          Food Log
-        </Heading>
-      </Box>
-      <CollectUserInformation  onSave={()=>{}}/>
+    <MainLayout title="Food Log">
       <Box mb={8}>
         <AddFoodForm onAddFood={addFood} />
       </Box>
@@ -84,7 +76,7 @@ const Home: React.FC = () => {
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
-    </Container>
+    </MainLayout>
   );
 };
 
