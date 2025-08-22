@@ -1,6 +1,17 @@
-import { SimpleGrid, FormControl, FormLabel, Input, InputGroup, InputLeftAddon, Button, ButtonGroup, Select, HStack } from '@chakra-ui/react';
-import React, { useState } from 'react';
-
+import {
+  SimpleGrid,
+  FormControl,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  Button,
+  ButtonGroup,
+  Select,
+  HStack,
+} from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 interface UserInformation {
   age: string;
   weight: string;
@@ -14,34 +25,42 @@ interface Props {
 }
 
 const CollectUserInformation: React.FC<Props> = ({ onSave }) => {
-  const [age, setAge] = useState('');
-  const [weight, setWeight] = useState('');
-  const [gender, setGender] = useState('');
-  const [goal, setGoal] = useState('');
-  const [heightUnit, setHeightUnit] = useState<'cm' | 'ft-in'>('cm');
-  const [heightCm, setHeightCm] = useState('');
-  const [heightFt, setHeightFt] = useState('');
-  const [heightInches, setHeightInches] = useState('');
+  const router = useRouter();
+  const [age, setAge] = useState("");
+  const [weight, setWeight] = useState("");
+  const [gender, setGender] = useState("");
+  const [goal, setGoal] = useState("");
+  const [heightUnit, setHeightUnit] = useState<"cm" | "ft-in">("cm");
+  const [heightCm, setHeightCm] = useState("");
+  const [heightFt, setHeightFt] = useState("");
+  const [heightInches, setHeightInches] = useState("");
 
-  const genders = ['Male', 'Female', 'Other'];
+  useEffect(() => {
+    const alreadyCollected = localStorage.getItem("userInformation");
+    if (!alreadyCollected) {
+      router.push("/collect-user-information");
+    }
+  }, []);
+
+  const genders = ["Male", "Female", "Other"];
   const goals = [
-    'Lose Weight',
-    'Build Muscle',
-    'Stay Fit',
-    'Improve Endurance',
-    'Increase Flexibility',
-    'Boost Energy',
-    'Improve Overall Health',
-    'Sports Performance',
-    'Rehabilitation',
-    'Other'
+    "Lose Weight",
+    "Build Muscle",
+    "Stay Fit",
+    "Improve Endurance",
+    "Increase Flexibility",
+    "Boost Energy",
+    "Improve Overall Health",
+    "Sports Performance",
+    "Rehabilitation",
+    "Other",
   ];
 
   const handleSave = () => {
     const height =
-      heightUnit === 'cm'
-        ? { unit: 'cm', cm: heightCm }
-        : { unit: 'ft-in', ft: heightFt, inches: heightInches };
+      heightUnit === "cm"
+        ? { unit: "cm", cm: heightCm }
+        : { unit: "ft-in", ft: heightFt, inches: heightInches };
 
     onSave({ age, weight, gender, goal, height });
   };
@@ -64,8 +83,8 @@ const CollectUserInformation: React.FC<Props> = ({ onSave }) => {
           {genders.map((g) => (
             <Button
               key={g}
-              variant={gender === g ? 'solid' : 'outline'}
-              colorScheme={gender === g ? 'brand' : 'gray'}
+              variant={gender === g ? "solid" : "outline"}
+              colorScheme={gender === g ? "brand" : "gray"}
               onClick={() => setGender(g)}
             >
               {g}
@@ -89,11 +108,14 @@ const CollectUserInformation: React.FC<Props> = ({ onSave }) => {
 
       <FormControl>
         <FormLabel>Height</FormLabel>
-        <Select value={heightUnit} onChange={(e) => setHeightUnit(e.target.value as 'cm' | 'ft-in')}>
+        <Select
+          value={heightUnit}
+          onChange={(e) => setHeightUnit(e.target.value as "cm" | "ft-in")}
+        >
           <option value="cm">cm</option>
           <option value="ft-in">ft/inches</option>
         </Select>
-        {heightUnit === 'cm' ? (
+        {heightUnit === "cm" ? (
           <Input
             type="number"
             placeholder="Enter height in cm"
@@ -125,8 +147,8 @@ const CollectUserInformation: React.FC<Props> = ({ onSave }) => {
           {goals.map((g) => (
             <Button
               key={g}
-              variant={goal === g ? 'solid' : 'outline'}
-              colorScheme={goal === g ? 'brand' : 'gray'}
+              variant={goal === g ? "solid" : "outline"}
+              colorScheme={goal === g ? "brand" : "gray"}
               onClick={() => setGoal(g)}
             >
               {g}
