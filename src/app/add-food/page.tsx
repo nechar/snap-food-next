@@ -31,6 +31,7 @@ import {
 } from "react-icons/fa";
 import { Food, FoodNutrient } from "@/app/model/food-nutrient";
 import { useFood } from "@/context/FoodContext";
+import { useRouter } from "next/navigation";
 
 const AddFood: React.FC = () => {
   const [foodName, setFoodName] = useState("");
@@ -47,11 +48,11 @@ const AddFood: React.FC = () => {
   const [showMacros, setShowMacros] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const { addFood } = useFood();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const confirm = (e: React.FormEvent) => {
     addFood({
       food_name: foodName,
       quantity_grams: quantityGrams || 0,
@@ -70,6 +71,7 @@ const AddFood: React.FC = () => {
     setCarbohydratesPerGram(undefined);
     setFatPerGram(undefined);
     setShowMacros(false);
+    router.push("/dashboard");
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -138,7 +140,7 @@ const AddFood: React.FC = () => {
 
   return (
     <MainLayout title="Food Log">
-      <Box as="form" onSubmit={handleSubmit}>
+      <Box as="form">
         {!showMacros && (
           <VStack spacing={4} align="stretch">
             <Text fontSize="xl" fontWeight="bold" mb={2} color="gray.700">
@@ -287,7 +289,12 @@ const AddFood: React.FC = () => {
             </FormControl>
 
             <HStack spacing={4} justifyContent="flex-end">
-              <Button type="submit" colorScheme="brand" size="lg">
+              <Button
+                type="submit"
+                colorScheme="brand"
+                size="lg"
+                onClick={confirm}
+              >
                 Confirm
               </Button>
               <Button variant="outline" onClick={handleCancel} size="lg">
