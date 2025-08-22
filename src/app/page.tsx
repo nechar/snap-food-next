@@ -15,7 +15,7 @@ const Home: React.FC = () => {
   const [foods, setFoods] = useState<Food[]>([]);
   const [accordionIndex, setAccordionIndex] = useState<number[]>([]);
   const router = useRouter();
-  
+
 
   const addFood = (food: Food) => {
     setFoods([...foods, food]);
@@ -26,12 +26,9 @@ const Home: React.FC = () => {
   useEffect(() => {
     const alreadyCollected = localStorage.getItem("userInformation");
     if (!alreadyCollected) {
-      console.log("User information not collected yet, redirecting to form.");
       router.push("/collect-user-information");
-    } else {
-      console.log("User information already collected, skipping form.");
     }
-  }, [localStorage]);
+  }, []);
 
   const totalCalories = foods.reduce((acc, food) => acc + (food.quantity_grams * food.macro_nutrients_per_gram.calories), 0);
   const totalProtein = foods.reduce((acc, food) => acc + (food.quantity_grams * food.macro_nutrients_per_gram.protein), 0);
