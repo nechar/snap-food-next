@@ -14,7 +14,7 @@ import {
   Select,
   HStack,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { useRouter } from "next/navigation";
 interface UserInformation {
   age: string;
@@ -36,13 +36,6 @@ const CollectUserInformationPage = () => {
   const [heightFt, setHeightFt] = useState("");
   const [heightInches, setHeightInches] = useState("");
 
-  useEffect(() => {
-    const alreadyCollected = localStorage.getItem("userInformation");
-    console.log("🚀 ~ CollectUserInformation ~ alreadyCollected:", alreadyCollected);
-    if (!alreadyCollected) {
-      router.push("/collect-user-information");
-    }
-  }, []);
 
   const genders = ["Male", "Female", "Other"];
   const goals = [

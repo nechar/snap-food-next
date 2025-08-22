@@ -2,21 +2,36 @@
 'use client';
 
   import { Box, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import Meal from '@/components/Meal';
 import Summary from '@/components/Summary';
 import AddFoodForm from '@/components/AddFoodForm';
 import { Food } from '@/app/model/food-nutrient';
 import MainLayout from '@/components/Layout';
+import { useRouter } from "next/navigation";
+
 
 const Home: React.FC = () => {
   const [foods, setFoods] = useState<Food[]>([]);
   const [accordionIndex, setAccordionIndex] = useState<number[]>([]);
+  const router = useRouter();
+  
 
   const addFood = (food: Food) => {
     setFoods([...foods, food]);
     setAccordionIndex([0, 1]); // Open both accordions
   };
+
+
+  useEffect(() => {
+    const alreadyCollected = localStorage.getItem("userInformation");
+    if (!alreadyCollected) {
+      console.log("User information not collected yet, redirecting to form.");
+      router.push("/collect-user-information");
+    } else {
+      console.log("User information already collected, skipping form.");
+    }
+  }, [localStorage]);
 
   const totalCalories = foods.reduce((acc, food) => acc + (food.quantity_grams * food.macro_nutrients_per_gram.calories), 0);
   const totalProtein = foods.reduce((acc, food) => acc + (food.quantity_grams * food.macro_nutrients_per_gram.protein), 0);
