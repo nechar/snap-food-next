@@ -50,7 +50,7 @@ const CollectUserInformationPage = () => {
   ];
 
   const handleSave = () => {
-    router.push("/dashboard");
+    router.push("/add-food");
   };
 
   return (
