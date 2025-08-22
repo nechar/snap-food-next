@@ -1,4 +1,4 @@
-import { SimpleGrid, FormControl, FormLabel, Input, InputGroup, InputLeftAddon, Select, Button } from '@chakra-ui/react';
+import { SimpleGrid, FormControl, FormLabel, Input, InputGroup, InputLeftAddon, Select, Button, ButtonGroup } from '@chakra-ui/react';
 import React, { useState } from 'react';
 
 interface UserInformation {
@@ -17,6 +17,8 @@ const CollectUserInformation: React.FC<Props> = ({ onSave }) => {
   const [weight, setWeight] = useState('');
   const [gender, setGender] = useState('');
   const [goal, setGoal] = useState('');
+
+  const goals = ['Lose Weight', 'Build Muscle', 'Stay Fit', 'Improve Endurance'];
 
   const handleSave = () => {
     onSave({ age, weight, gender, goal });
@@ -55,13 +57,20 @@ const CollectUserInformation: React.FC<Props> = ({ onSave }) => {
         </InputGroup>
       </FormControl>
 
-      <FormControl>
+      <FormControl gridColumn="span 2">
         <FormLabel>Goal</FormLabel>
-        <Input
-          placeholder="Enter your fitness goal"
-          value={goal}
-          onChange={(e) => setGoal(e.target.value)}
-        />
+        <ButtonGroup spacing={4} isAttached>
+          {goals.map((g) => (
+            <Button
+              key={g}
+              variant={goal === g ? 'solid' : 'outline'}
+              colorScheme={goal === g ? 'brand' : 'gray'}
+              onClick={() => setGoal(g)}
+            >
+              {g}
+            </Button>
+          ))}
+        </ButtonGroup>
       </FormControl>
 
       <Button colorScheme="brand" onClick={handleSave} gridColumn="span 2">
