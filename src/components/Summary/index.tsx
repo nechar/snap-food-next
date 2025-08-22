@@ -14,20 +14,31 @@ import {
   FaBreadSlice,
   FaHamburger,
 } from "react-icons/fa";
+import { useFood } from "@/context/FoodContext";
 
-interface SummaryProps {
-  totalCalories: number;
-  totalProtein: number;
-  totalCarbs: number;
-  totalFat: number;
-}
+const Summary: React.FC = () => {
+  const { foods } = useFood();
 
-const Summary: React.FC<SummaryProps> = ({
-  totalCalories,
-  totalProtein,
-  totalCarbs,
-  totalFat,
-}) => {
+  const totalCalories = foods.reduce(
+    (acc, food) =>
+      acc + food.quantity_grams * food.macro_nutrients_per_gram.calories,
+    0
+  );
+  const totalProtein = foods.reduce(
+    (acc, food) =>
+      acc + food.quantity_grams * food.macro_nutrients_per_gram.protein,
+    0
+  );
+  const totalCarbs = foods.reduce(
+    (acc, food) =>
+      acc + food.quantity_grams * food.macro_nutrients_per_gram.carbohydrates,
+    0
+  );
+  const totalFat = foods.reduce(
+    (acc, food) =>
+      acc + food.quantity_grams * food.macro_nutrients_per_gram.fat,
+    0
+  );
   return (
     <Box p={4} bg="gray.50" borderRadius="lg">
       <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={5}>
