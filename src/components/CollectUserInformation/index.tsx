@@ -1,4 +1,4 @@
-import { SimpleGrid, FormControl, FormLabel, Input, InputGroup, InputLeftAddon, Select, Button, ButtonGroup } from '@chakra-ui/react';
+import { SimpleGrid, FormControl, FormLabel, Input, InputGroup, InputLeftAddon, Button, ButtonGroup } from '@chakra-ui/react';
 import React, { useState } from 'react';
 
 interface UserInformation {
@@ -18,6 +18,7 @@ const CollectUserInformation: React.FC<Props> = ({ onSave }) => {
   const [gender, setGender] = useState('');
   const [goal, setGoal] = useState('');
 
+  const genders = ['Male', 'Female', 'Other'];
   const goals = ['Lose Weight', 'Build Muscle', 'Stay Fit', 'Improve Endurance'];
 
   const handleSave = () => {
@@ -38,10 +39,18 @@ const CollectUserInformation: React.FC<Props> = ({ onSave }) => {
 
       <FormControl>
         <FormLabel>Gender</FormLabel>
-        <Select placeholder="Select gender" value={gender} onChange={(e) => setGender(e.target.value)}>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </Select>
+        <ButtonGroup spacing={4} isAttached>
+          {genders.map((g) => (
+            <Button
+              key={g}
+              variant={gender === g ? 'solid' : 'outline'}
+              colorScheme={gender === g ? 'brand' : 'gray'}
+              onClick={() => setGender(g)}
+            >
+              {g}
+            </Button>
+          ))}
+        </ButtonGroup>
       </FormControl>
 
       <FormControl>
