@@ -5,7 +5,7 @@ import React from "react";
 import AddFoodForm from "@/components/AddFoodForm";
 import MainLayout from "@/components/Layout";
 
-const Dashboard: React.FC = () => {
+const AddFood: React.FC = () => {
   return (
     <MainLayout title="Food Log">
       <Box mb={8}>
@@ -15,4 +15,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default AddFood;
