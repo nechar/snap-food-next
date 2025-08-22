@@ -41,11 +41,6 @@ const Dashboard: React.FC = () => {
     0
   );
 
-  const breakfastFoods = foods.filter((food) => food.meal_type === "Breakfast");
-  const lunchFoods = foods.filter((food) => food.meal_type === "Lunch");
-  const dinnerFoods = foods.filter((food) => food.meal_type === "Dinner");
-  const snackFoods = foods.filter((food) => food.meal_type === "Snacks");
-
   return (
     <MainLayout title="Food Log">
       <Box mb={8}>
@@ -63,10 +58,10 @@ const Dashboard: React.FC = () => {
       />
 
       <Box>
-        <Meal mealName="Breakfast" foods={breakfastFoods} />
-        <Meal mealName="Lunch" foods={lunchFoods} />
-        <Meal mealName="Snacks" foods={snackFoods} />
-        <Meal mealName="Dinner" foods={dinnerFoods} />
+        <Meal mealName="Breakfast" />
+        <Meal mealName="Lunch" />
+        <Meal mealName="Snacks" />
+        <Meal mealName="Dinner" />
       </Box>
     </MainLayout>
   );
