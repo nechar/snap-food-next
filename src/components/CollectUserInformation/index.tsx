@@ -1,4 +1,4 @@
-import { SimpleGrid, FormControl, FormLabel, Input, InputGroup, InputLeftAddon, Button, ButtonGroup } from '@chakra-ui/react';
+import { SimpleGrid, FormControl, FormLabel, Input, InputGroup, InputLeftAddon, Button, ButtonGroup, Select, HStack } from '@chakra-ui/react';
 import React, { useState } from 'react';
 
 interface UserInformation {
@@ -6,6 +6,12 @@ interface UserInformation {
   weight: string;
   gender: string;
   goal: string;
+  height: {
+    unit: 'cm' | 'ft-in';
+    cm?: string;
+    ft?: string;
+    inches?: string;
+  };
 }
 
 interface Props {
@@ -17,12 +23,21 @@ const CollectUserInformation: React.FC<Props> = ({ onSave }) => {
   const [weight, setWeight] = useState('');
   const [gender, setGender] = useState('');
   const [goal, setGoal] = useState('');
+  const [heightUnit, setHeightUnit] = useState<'cm' | 'ft-in'>('cm');
+  const [heightCm, setHeightCm] = useState('');
+  const [heightFt, setHeightFt] = useState('');
+  const [heightInches, setHeightInches] = useState('');
 
   const genders = ['Male', 'Female', 'Other'];
   const goals = ['Lose Weight', 'Build Muscle', 'Stay Fit', 'Improve Endurance'];
 
   const handleSave = () => {
-    onSave({ age, weight, gender, goal });
+    const height =
+      heightUnit === 'cm'
+        ? { unit: 'cm', cm: heightCm }
+        : { unit: 'ft-in', ft: heightFt, inches: heightInches };
+
+    onSave({ age, weight, gender, goal, height });
   };
 
   return (
@@ -64,6 +79,38 @@ const CollectUserInformation: React.FC<Props> = ({ onSave }) => {
             onChange={(e) => setWeight(e.target.value)}
           />
         </InputGroup>
+      </FormControl>
+
+      <FormControl>
+        <FormLabel>Height</FormLabel>
+        <Select value={heightUnit} onChange={(e) => setHeightUnit(e.target.value as 'cm' | 'ft-in')}>
+          <option value="cm">cm</option>
+          <option value="ft-in">ft/inches</option>
+        </Select>
+        {heightUnit === 'cm' ? (
+          <Input
+            type="number"
+            placeholder="Enter height in cm"
+            value={heightCm}
+            onChange={(e) => setHeightCm(e.target.value)}
+            mt={2}
+          />
+        ) : (
+          <HStack spacing={2} mt={2}>
+            <Input
+              type="number"
+              placeholder="ft"
+              value={heightFt}
+              onChange={(e) => setHeightFt(e.target.value)}
+            />
+            <Input
+              type="number"
+              placeholder="inches"
+              value={heightInches}
+              onChange={(e) => setHeightInches(e.target.value)}
+            />
+          </HStack>
+        )}
       </FormControl>
 
       <FormControl gridColumn="span 2">
