@@ -1,13 +1,16 @@
 "use client";
 
 import { Box, Button, Icon } from "@chakra-ui/react";
-import { Plus } from "lucide-react"; // You can also use Chakra's built-in icons
 import React from "react";
 import Meal from "@/components/Meal";
 import Summary from "@/components/Summary";
 import MainLayout from "@/components/Layout";
+import { useRouter } from "next/navigation";
+import { Plus } from "lucide-react";
 
 const Dashboard: React.FC = () => {
+  const router = useRouter();
+
   return (
     <MainLayout title="Summary">
       <Box mb={3}>
@@ -33,6 +36,9 @@ const Dashboard: React.FC = () => {
         py={6}
         leftIcon={<Icon as={Plus} />}
         _hover={{ transform: "scale(1.05)" }}
+        onClick={() => {
+          router.push("/add-meal");
+        }} // Adjust the route as needed
       >
         Add Meal
       </Button>
