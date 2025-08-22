@@ -8,21 +8,20 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Meal from "@/components/Meal";
 import Summary from "@/components/Summary";
 import AddFoodForm from "@/components/AddFoodForm";
-import { Food } from "@/app/model/food-nutrient";
+import { useFood } from "@/context/FoodContext";
 import MainLayout from "@/components/Layout";
-import { useRouter } from "next/navigation";
+import { Food } from "../model/food-nutrient";
 
 const Dashboard: React.FC = () => {
-  const [foods, setFoods] = useState<Food[]>([]);
+  const { foods, addFood } = useFood();
   const [accordionIndex, setAccordionIndex] = useState<number[]>([]);
-  const router = useRouter();
 
-  const addFood = (food: Food) => {
-    setFoods([...foods, food]);
+  const handleAddFood = (food: Food) => {
+    addFood(food);
     setAccordionIndex([0, 1]); // Open both accordions
   };
 
@@ -52,12 +51,10 @@ const Dashboard: React.FC = () => {
   const dinnerFoods = foods.filter((food) => food.meal_type === "Dinner");
   const snackFoods = foods.filter((food) => food.meal_type === "Snacks");
 
-  // ... (rest of the file is the same until the return statement)
-
   return (
     <MainLayout title="Food Log">
       <Box mb={8}>
-        <AddFoodForm onAddFood={addFood} />
+        <AddFoodForm onAddFood={handleAddFood} />
       </Box>
 
       <Accordion
