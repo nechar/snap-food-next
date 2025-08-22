@@ -6,12 +6,7 @@ interface UserInformation {
   weight: string;
   gender: string;
   goal: string;
-  height: {
-    unit: 'cm' | 'ft-in';
-    cm?: string;
-    ft?: string;
-    inches?: string;
-  };
+  height: any;
 }
 
 interface Props {
@@ -29,7 +24,18 @@ const CollectUserInformation: React.FC<Props> = ({ onSave }) => {
   const [heightInches, setHeightInches] = useState('');
 
   const genders = ['Male', 'Female', 'Other'];
-  const goals = ['Lose Weight', 'Build Muscle', 'Stay Fit', 'Improve Endurance'];
+  const goals = [
+    'Lose Weight',
+    'Build Muscle',
+    'Stay Fit',
+    'Improve Endurance',
+    'Increase Flexibility',
+    'Boost Energy',
+    'Improve Overall Health',
+    'Sports Performance',
+    'Rehabilitation',
+    'Other'
+  ];
 
   const handleSave = () => {
     const height =
@@ -115,7 +121,7 @@ const CollectUserInformation: React.FC<Props> = ({ onSave }) => {
 
       <FormControl gridColumn="span 2">
         <FormLabel>Goal</FormLabel>
-        <ButtonGroup spacing={4} isAttached>
+        <ButtonGroup spacing={4} flexWrap="wrap">
           {goals.map((g) => (
             <Button
               key={g}
