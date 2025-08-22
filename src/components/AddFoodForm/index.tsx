@@ -27,12 +27,9 @@ import {
   FaHamburger,
 } from "react-icons/fa";
 import { Food, FoodNutrient } from "@/app/model/food-nutrient";
+import { useFood } from "@/context/FoodContext";
 
-interface AddFoodFormProps {
-  onAddFood: (food: Food) => void;
-}
-
-const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
+const AddFoodForm: React.FC = () => {
   const [foodName, setFoodName] = useState("");
   const [quantityGrams, setQuantityGrams] = useState<number | undefined>();
   const [caloriesPerGram, setCaloriesPerGram] = useState<number | undefined>();
@@ -48,9 +45,11 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const { addFood } = useFood();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onAddFood({
+    addFood({
       food_name: foodName,
       quantity_grams: quantityGrams || 0,
       macro_nutrients_per_gram: {
@@ -135,7 +134,14 @@ const AddFoodForm: React.FC<AddFoodFormProps> = ({ onAddFood }) => {
   };
 
   return (
-    <Box as="form" onSubmit={handleSubmit} p={6} borderRadius="lg" bg="white" boxShadow="md">
+    <Box
+      as="form"
+      onSubmit={handleSubmit}
+      p={6}
+      borderRadius="lg"
+      bg="white"
+      boxShadow="md"
+    >
       {!showMacros && (
         <VStack spacing={4} align="stretch">
           <Text fontSize="xl" fontWeight="bold" mb={2} color="gray.700">
